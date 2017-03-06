@@ -15,6 +15,9 @@
 		533089061E4E7CA6002B3AD3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 533089041E4E7CA6002B3AD3 /* LaunchScreen.storyboard */; };
 		533089111E4E7CA6002B3AD3 /* BracketBeeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533089101E4E7CA6002B3AD3 /* BracketBeeTests.swift */; };
 		5330891C1E4E7CA6002B3AD3 /* BracketBeeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5330891B1E4E7CA6002B3AD3 /* BracketBeeUITests.swift */; };
+		5330892A1E4FAB9B002B3AD3 /* Bracket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533089291E4FAB9B002B3AD3 /* Bracket.swift */; };
+		5330892C1E4FABA2002B3AD3 /* Matchup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5330892B1E4FABA2002B3AD3 /* Matchup.swift */; };
+		5330892F1E4FB430002B3AD3 /* BracketController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5330892E1E4FB430002B3AD3 /* BracketController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		533089171E4E7CA6002B3AD3 /* BracketBeeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BracketBeeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5330891B1E4E7CA6002B3AD3 /* BracketBeeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketBeeUITests.swift; sourceTree = "<group>"; };
 		5330891D1E4E7CA6002B3AD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		533089291E4FAB9B002B3AD3 /* Bracket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bracket.swift; sourceTree = "<group>"; };
+		5330892B1E4FABA2002B3AD3 /* Matchup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matchup.swift; sourceTree = "<group>"; };
+		5330892E1E4FB430002B3AD3 /* BracketController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,8 @@
 			children = (
 				533088F81E4E7CA6002B3AD3 /* AppDelegate.swift */,
 				533088FA1E4E7CA6002B3AD3 /* ViewController.swift */,
+				5330892E1E4FB430002B3AD3 /* BracketController.swift */,
+				5330892D1E4FB416002B3AD3 /* temperary models */,
 				533088FC1E4E7CA6002B3AD3 /* Main.storyboard */,
 				533089021E4E7CA6002B3AD3 /* Assets.xcassets */,
 				533089041E4E7CA6002B3AD3 /* LaunchScreen.storyboard */,
@@ -126,6 +134,15 @@
 				5330891D1E4E7CA6002B3AD3 /* Info.plist */,
 			);
 			path = BracketBeeUITests;
+			sourceTree = "<group>";
+		};
+		5330892D1E4FB416002B3AD3 /* temperary models */ = {
+			isa = PBXGroup;
+			children = (
+				5330892B1E4FABA2002B3AD3 /* Matchup.swift */,
+				533089291E4FAB9B002B3AD3 /* Bracket.swift */,
+			);
+			name = "temperary models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,9 +282,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5330892A1E4FAB9B002B3AD3 /* Bracket.swift in Sources */,
 				533088FB1E4E7CA6002B3AD3 /* ViewController.swift in Sources */,
 				533088F91E4E7CA6002B3AD3 /* AppDelegate.swift in Sources */,
 				533089011E4E7CA6002B3AD3 /* BracketBee.xcdatamodeld in Sources */,
+				5330892F1E4FB430002B3AD3 /* BracketController.swift in Sources */,
+				5330892C1E4FABA2002B3AD3 /* Matchup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +538,7 @@
 				533089221E4E7CA6002B3AD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		533089231E4E7CA6002B3AD3 /* Build configuration list for PBXNativeTarget "BracketBeeTests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +547,7 @@
 				533089251E4E7CA6002B3AD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		533089261E4E7CA6002B3AD3 /* Build configuration list for PBXNativeTarget "BracketBeeUITests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +556,7 @@
 				533089281E4E7CA6002B3AD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
