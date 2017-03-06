@@ -18,6 +18,9 @@
 		5330892A1E4FAB9B002B3AD3 /* Bracket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533089291E4FAB9B002B3AD3 /* Bracket.swift */; };
 		5330892C1E4FABA2002B3AD3 /* Matchup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5330892B1E4FABA2002B3AD3 /* Matchup.swift */; };
 		5330892F1E4FB430002B3AD3 /* BracketController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5330892E1E4FB430002B3AD3 /* BracketController.swift */; };
+		538FA0281E6DE249000B778B /* CreateBracketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538FA0271E6DE249000B778B /* CreateBracketViewController.swift */; };
+		53BDDD7F1E6DD19500ADDE3F /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BDDD7E1E6DD19500ADDE3F /* Keys.swift */; };
+		53BDDD811E6DD3D500ADDE3F /* BracketListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BDDD801E6DD3D500ADDE3F /* BracketListTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		533089291E4FAB9B002B3AD3 /* Bracket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bracket.swift; sourceTree = "<group>"; };
 		5330892B1E4FABA2002B3AD3 /* Matchup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matchup.swift; sourceTree = "<group>"; };
 		5330892E1E4FB430002B3AD3 /* BracketController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketController.swift; sourceTree = "<group>"; };
+		538FA0271E6DE249000B778B /* CreateBracketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBracketViewController.swift; sourceTree = "<group>"; };
+		53BDDD7E1E6DD19500ADDE3F /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		53BDDD801E6DD3D500ADDE3F /* BracketListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketListTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,9 +114,11 @@
 				533088F81E4E7CA6002B3AD3 /* AppDelegate.swift */,
 				533088FA1E4E7CA6002B3AD3 /* ViewController.swift */,
 				5330892E1E4FB430002B3AD3 /* BracketController.swift */,
-				5330892D1E4FB416002B3AD3 /* temperary models */,
-				533088FC1E4E7CA6002B3AD3 /* Main.storyboard */,
+				5330892D1E4FB416002B3AD3 /* Models */,
+				53BDDD821E6DD3E200ADDE3F /* View Controller */,
+				53BDDD7D1E6DD18400ADDE3F /* Views */,
 				533089021E4E7CA6002B3AD3 /* Assets.xcassets */,
+				53BDDD7E1E6DD19500ADDE3F /* Keys.swift */,
 				533089041E4E7CA6002B3AD3 /* LaunchScreen.storyboard */,
 				533089071E4E7CA6002B3AD3 /* Info.plist */,
 				533088FF1E4E7CA6002B3AD3 /* BracketBee.xcdatamodeld */,
@@ -136,13 +144,30 @@
 			path = BracketBeeUITests;
 			sourceTree = "<group>";
 		};
-		5330892D1E4FB416002B3AD3 /* temperary models */ = {
+		5330892D1E4FB416002B3AD3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				5330892B1E4FABA2002B3AD3 /* Matchup.swift */,
 				533089291E4FAB9B002B3AD3 /* Bracket.swift */,
 			);
-			name = "temperary models";
+			name = Models;
+			sourceTree = "<group>";
+		};
+		53BDDD7D1E6DD18400ADDE3F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				533088FC1E4E7CA6002B3AD3 /* Main.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		53BDDD821E6DD3E200ADDE3F /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				53BDDD801E6DD3D500ADDE3F /* BracketListTableViewController.swift */,
+				538FA0271E6DE249000B778B /* CreateBracketViewController.swift */,
+			);
+			name = "View Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,7 +311,10 @@
 				533088FB1E4E7CA6002B3AD3 /* ViewController.swift in Sources */,
 				533088F91E4E7CA6002B3AD3 /* AppDelegate.swift in Sources */,
 				533089011E4E7CA6002B3AD3 /* BracketBee.xcdatamodeld in Sources */,
+				53BDDD7F1E6DD19500ADDE3F /* Keys.swift in Sources */,
+				538FA0281E6DE249000B778B /* CreateBracketViewController.swift in Sources */,
 				5330892F1E4FB430002B3AD3 /* BracketController.swift in Sources */,
+				53BDDD811E6DD3D500ADDE3F /* BracketListTableViewController.swift in Sources */,
 				5330892C1E4FABA2002B3AD3 /* Matchup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
