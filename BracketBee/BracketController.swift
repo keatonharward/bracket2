@@ -22,7 +22,7 @@ class BracketController {
             print("Error creating champion node, bracket was not layed out properly")
             return
         }
-        
+        print(champion.description)
         let bracket = Bracket(name: name, seeded: seeded, teams: teams, champion: champion)
         brackets.append(bracket)
         // TODO: - save me
@@ -50,7 +50,6 @@ class BracketController {
         for team in teams {
             let nodeTeam = team
             let node = MatchupNode.node(.empty, nodeTeam, .empty)
-            print(node.description)
             teamNodes.append(node)
         }
         

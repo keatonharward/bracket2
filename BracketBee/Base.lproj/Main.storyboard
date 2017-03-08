@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,7 +21,7 @@
                         <view key="tableFooterView" contentMode="scaleToFill" id="I4v-yd-ePu">
                             <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.14338690042495728" green="0.14352902770042419" blue="0.14340889453887939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="bracketCell" textLabel="BOg-a9-s28" detailTextLabel="V3Y-72-kTb" style="IBUITableViewCellStyleSubtitle" id="FPA-Ef-GXo">
@@ -57,12 +58,161 @@
                     <navigationItem key="navigationItem" title="My Brackets" id="8fd-Wu-0sa">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="8OH-IA-bqK">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="GMH-gd-rNn" kind="show" id="c4t-xO-w4V"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jlU-4l-Yld" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="665" y="121"/>
+        </scene>
+        <!--Create a Bracket-->
+        <scene sceneID="iaa-e7-HMX">
+            <objects>
+                <viewController title="Create a Bracket" id="GMH-gd-rNn" customClass="CreateBracketViewController" customModule="BracketBee" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8Qh-hp-r7b"/>
+                        <viewControllerLayoutGuide type="bottom" id="XCd-rr-Iaw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UwY-gx-WZE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Bracket Name" textAlignment="natural" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="Mbn-ce-lJL">
+                                <rect key="frame" x="22" y="89" width="331" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="xvH-RA-aZ6"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ToR-JI-qdP">
+                                <rect key="frame" x="22" y="561" width="331" height="52"/>
+                                <color key="backgroundColor" red="0.0098299114029999999" green="0.84820491080000004" blue="0.99993842840000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="9MN-Cm-yzt"/>
+                                </constraints>
+                                <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="163" minY="14" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Create Bracket" image="add bracket"/>
+                                <connections>
+                                    <action selector="createBracketButtonTapped:" destination="GMH-gd-rNn" eventType="touchUpInside" id="EzE-sm-y3M"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ano-eX-Q36">
+                                <rect key="frame" x="22" y="223" width="331" height="52"/>
+                                <color key="backgroundColor" red="0.0098299114029999999" green="0.84820491080000004" blue="0.99993842840000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="52" id="Zqt-Q6-ZkB"/>
+                                    <constraint firstAttribute="height" constant="52" id="z8i-1A-lVU"/>
+                                </constraints>
+                                <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="163" minY="14" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Add Participant" image="add participant"/>
+                                <connections>
+                                    <action selector="addParticipantButtonTapped:" destination="GMH-gd-rNn" eventType="touchUpInside" id="gTe-Pt-qW7"/>
+                                </connections>
+                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="n5k-ve-DTU">
+                                <rect key="frame" x="22" y="156" width="331" height="53"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="YQw-p6-HLT"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Seeded"/>
+                                    <segment title="Random"/>
+                                </segments>
+                                <connections>
+                                    <action selector="seedingToggled:" destination="GMH-gd-rNn" eventType="valueChanged" id="bgU-0n-s6p"/>
+                                </connections>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jxi-4Z-VlQ">
+                                <rect key="frame" x="22" y="290" width="331" height="256"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="MCt-D3-KEE">
+                                    <rect key="frame" x="0.0" y="72" width="331" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="participantCell" id="Eh8-IX-1eN" customClass="ParticipantTableViewCell" customModule="BracketBee" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="331" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eh8-IX-1eN" id="NJH-n8-2pc">
+                                            <rect key="frame" x="0.0" y="0.0" width="331" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="seed" translatesAutoresizingMaskIntoConstraints="NO" id="X0h-9B-5ui">
+                                                    <rect key="frame" x="8" y="7" width="29" height="29"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icq-Ed-cEB">
+                                                    <rect key="frame" x="8" y="7" width="29" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Team Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fo6-u1-mzn">
+                                                    <rect key="frame" x="45" y="11" width="278" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="seedImage" destination="X0h-9B-5ui" id="Dkf-hs-TPG"/>
+                                            <outlet property="seedLabel" destination="icq-Ed-cEB" id="fKn-Y1-0e1"/>
+                                            <outlet property="teamNameLabel" destination="Fo6-u1-mzn" id="VtM-8m-hfp"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="GMH-gd-rNn" id="NyQ-YU-cE7"/>
+                                    <outlet property="delegate" destination="GMH-gd-rNn" id="fco-6q-d6j"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XCd-rr-Iaw" firstAttribute="top" secondItem="ToR-JI-qdP" secondAttribute="bottom" constant="10" id="3M3-em-PT9"/>
+                            <constraint firstItem="jxi-4Z-VlQ" firstAttribute="leading" secondItem="UwY-gx-WZE" secondAttribute="leadingMargin" constant="6" id="9RV-Dq-i9z"/>
+                            <constraint firstItem="n5k-ve-DTU" firstAttribute="leading" secondItem="UwY-gx-WZE" secondAttribute="leadingMargin" constant="6" id="9Yh-I1-R92"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Mbn-ce-lJL" secondAttribute="trailing" constant="6" id="Bcn-If-jF7"/>
+                            <constraint firstItem="ano-eX-Q36" firstAttribute="leading" secondItem="UwY-gx-WZE" secondAttribute="leadingMargin" constant="6" id="G2H-35-8wp"/>
+                            <constraint firstItem="jxi-4Z-VlQ" firstAttribute="top" secondItem="ano-eX-Q36" secondAttribute="bottom" constant="15" id="Jbj-nj-NOH"/>
+                            <constraint firstItem="ToR-JI-qdP" firstAttribute="leading" secondItem="UwY-gx-WZE" secondAttribute="leadingMargin" constant="6" id="KKa-Zd-c7A"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="n5k-ve-DTU" secondAttribute="trailing" constant="6" id="MSe-eS-IgL"/>
+                            <constraint firstItem="ano-eX-Q36" firstAttribute="top" secondItem="n5k-ve-DTU" secondAttribute="bottom" constant="15" id="OWh-TB-ySl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="n5k-ve-DTU" secondAttribute="trailing" constant="6" id="UCv-wF-ZmK"/>
+                            <constraint firstItem="n5k-ve-DTU" firstAttribute="top" secondItem="Mbn-ce-lJL" secondAttribute="bottom" constant="15" id="Uxc-kK-1rJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ToR-JI-qdP" secondAttribute="trailing" constant="6" id="ZkP-cJ-g7O"/>
+                            <constraint firstItem="ToR-JI-qdP" firstAttribute="top" secondItem="jxi-4Z-VlQ" secondAttribute="bottom" constant="15" id="ZxF-9f-lbM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="jxi-4Z-VlQ" secondAttribute="trailing" constant="6" id="bR4-I1-7f7"/>
+                            <constraint firstItem="Mbn-ce-lJL" firstAttribute="leading" secondItem="UwY-gx-WZE" secondAttribute="leadingMargin" constant="6" id="h2T-Op-r39"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ano-eX-Q36" secondAttribute="trailing" constant="6" id="kfw-4h-ONF"/>
+                            <constraint firstItem="n5k-ve-DTU" firstAttribute="leading" secondItem="UwY-gx-WZE" secondAttribute="leadingMargin" constant="6" id="mwi-cS-vNE"/>
+                            <constraint firstItem="Mbn-ce-lJL" firstAttribute="top" secondItem="8Qh-hp-r7b" secondAttribute="bottom" constant="25" id="obe-IY-bzG"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="bracketNameTextField" destination="Mbn-ce-lJL" id="N3I-47-RWm"/>
+                        <outlet property="createBracketButton" destination="ToR-JI-qdP" id="gJe-vU-EQ2"/>
+                        <outlet property="participantTableView" destination="jxi-4Z-VlQ" id="1HO-yZ-L7C"/>
+                        <outlet property="seedingSegmentedControl" destination="n5k-ve-DTU" id="qGH-EA-fiH"/>
+                        <outlet property="tableviewBackgroundView" destination="MCt-D3-KEE" id="5re-7h-efE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rDj-Gj-qNA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1368.8" y="120.98950524737631"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5Jp-zB-v7h">
@@ -88,4 +238,9 @@
             <point key="canvasLocation" x="-82.400000000000006" y="120.98950524737631"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="add bracket" width="48" height="38"/>
+        <image name="add participant" width="48" height="39"/>
+        <image name="seed" width="29" height="29"/>
+    </resources>
 </document>
