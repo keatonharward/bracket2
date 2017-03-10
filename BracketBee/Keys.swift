@@ -17,4 +17,6 @@ class Keys {
     let accent = UIColor(colorLiteralRed: 89 / 255, green: 214 / 255, blue: 255 / 255, alpha: 1)
     let fontColor = UIColor.white
     let greyAccent = UIColor(colorLiteralRed: 151 / 255, green: 151 / 255, blue: 151 / 255, alpha: 1)
+    
+    
 }

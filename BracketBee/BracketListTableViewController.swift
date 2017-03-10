@@ -15,6 +15,7 @@ class BracketListTableViewController: UITableViewController {
 
         self.tableView.separatorColor = Keys.shared.accent
         self.tableView.backgroundColor = Keys.shared.background
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
