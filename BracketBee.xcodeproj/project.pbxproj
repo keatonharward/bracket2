@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		531FCC0B1E73166F000AA223 /* ParticipantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531FCC0A1E73166F000AA223 /* ParticipantCollectionViewCell.swift */; };
+		531FCC0D1E731D29000AA223 /* BracketCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531FCC0C1E731D29000AA223 /* BracketCollectionViewController.swift */; };
+		531FCC0F1E732476000AA223 /* BracketCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531FCC0E1E732476000AA223 /* BracketCollectionViewLayout.swift */; };
 		533088F91E4E7CA6002B3AD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533088F81E4E7CA6002B3AD3 /* AppDelegate.swift */; };
 		533088FB1E4E7CA6002B3AD3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533088FA1E4E7CA6002B3AD3 /* ViewController.swift */; };
 		533088FE1E4E7CA6002B3AD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 533088FC1E4E7CA6002B3AD3 /* Main.storyboard */; };
@@ -42,6 +45,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		531FCC0A1E73166F000AA223 /* ParticipantCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantCollectionViewCell.swift; sourceTree = "<group>"; };
+		531FCC0C1E731D29000AA223 /* BracketCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketCollectionViewController.swift; sourceTree = "<group>"; };
+		531FCC0E1E732476000AA223 /* BracketCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketCollectionViewLayout.swift; sourceTree = "<group>"; };
 		533088F51E4E7CA6002B3AD3 /* BracketBee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BracketBee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		533088F81E4E7CA6002B3AD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		533088FA1E4E7CA6002B3AD3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +165,8 @@
 			isa = PBXGroup;
 			children = (
 				538FA02B1E6E34B6000B778B /* ParticipantTableViewCell.swift */,
+				531FCC0A1E73166F000AA223 /* ParticipantCollectionViewCell.swift */,
+				531FCC0E1E732476000AA223 /* BracketCollectionViewLayout.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -176,6 +184,7 @@
 			children = (
 				53BDDD801E6DD3D500ADDE3F /* BracketListTableViewController.swift */,
 				538FA0271E6DE249000B778B /* CreateBracketViewController.swift */,
+				531FCC0C1E731D29000AA223 /* BracketCollectionViewController.swift */,
 				538FA02D1E6E34BC000B778B /* Views */,
 			);
 			name = "View Controller";
@@ -323,7 +332,10 @@
 				533088F91E4E7CA6002B3AD3 /* AppDelegate.swift in Sources */,
 				533089011E4E7CA6002B3AD3 /* BracketBee.xcdatamodeld in Sources */,
 				53BDDD7F1E6DD19500ADDE3F /* Keys.swift in Sources */,
+				531FCC0F1E732476000AA223 /* BracketCollectionViewLayout.swift in Sources */,
 				538FA0281E6DE249000B778B /* CreateBracketViewController.swift in Sources */,
+				531FCC0B1E73166F000AA223 /* ParticipantCollectionViewCell.swift in Sources */,
+				531FCC0D1E731D29000AA223 /* BracketCollectionViewController.swift in Sources */,
 				538FA02C1E6E34B6000B778B /* ParticipantTableViewCell.swift in Sources */,
 				5330892F1E4FB430002B3AD3 /* BracketController.swift in Sources */,
 				53BDDD811E6DD3D500ADDE3F /* BracketListTableViewController.swift in Sources */,

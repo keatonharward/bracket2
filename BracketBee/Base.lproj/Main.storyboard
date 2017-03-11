@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="TH6-eY-cTe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aIu-zX-35k">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -213,6 +213,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rDj-Gj-qNA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1368.8" y="120.98950524737631"/>
+        </scene>
+        <!--Bracket Collection View Controller-->
+        <scene sceneID="YdR-kL-Elx">
+            <objects>
+                <collectionViewController id="aIu-zX-35k" customClass="BracketCollectionViewController" customModule="BracketBee" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="vvQ-h9-TIg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewLayout key="collectionViewLayout" id="P0M-04-rCB" customClass="BracketCollectionViewLayout" customModule="BracketBee" customModuleProvider="target"/>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="participantCell" id="nVw-Fx-yci" customClass="ParticipantCollectionViewCell" customModule="BracketBee" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERq-H7-xOd">
+                                            <rect key="frame" x="3" y="0.0" width="47" height="50"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="ERq-H7-xOd" firstAttribute="leading" secondItem="nVw-Fx-yci" secondAttribute="leading" constant="3" id="iOF-7e-F2g"/>
+                                    <constraint firstAttribute="trailing" secondItem="ERq-H7-xOd" secondAttribute="trailing" id="qtL-Ch-Exy"/>
+                                    <constraint firstAttribute="bottom" secondItem="ERq-H7-xOd" secondAttribute="bottom" id="vbI-we-IE5"/>
+                                    <constraint firstItem="ERq-H7-xOd" firstAttribute="top" secondItem="nVw-Fx-yci" secondAttribute="top" id="zxT-J1-hPG"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="label" destination="ERq-H7-xOd" id="aol-Ks-e1d"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="aIu-zX-35k" id="Yro-5W-Mvi"/>
+                            <outlet property="delegate" destination="aIu-zX-35k" id="qmR-9o-23H"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fpm-i5-obL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2127" y="121"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5Jp-zB-v7h">
