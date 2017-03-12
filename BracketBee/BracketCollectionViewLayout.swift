@@ -48,10 +48,10 @@ class BracketCollectionViewLayout: UICollectionViewLayout {
                                     var frame = attributes.frame
                                     
                                     if item == 0 {
-                                        frame.origin.x = xOffset
+                                        frame.origin.y = yOffset
                                     }
                                     
-                                    frame.origin.y = yOffset
+                                    frame.origin.x = xOffset
                                     attributes.frame = frame
                                 }
                             }
@@ -60,7 +60,7 @@ class BracketCollectionViewLayout: UICollectionViewLayout {
                             
                             if let attributes = cellAttributesDictionary[indexPath] {
                                 var frame = attributes.frame
-                                frame.origin.x = xOffset
+                                frame.origin.y = yOffset
                                 attributes.frame = frame
                             }
                         }
@@ -79,8 +79,8 @@ class BracketCollectionViewLayout: UICollectionViewLayout {
                     for item in 0...collectionView.numberOfItems(inSection: section) - 1 {
                         
                         let cellIndex = IndexPath(item: item, section: section)
-                        let xPos = Double(item) * CELL_WIDTH
-                        let yPos = Double(section) * CELL_HEIGHT
+                        let xPos = Double(section) * CELL_WIDTH
+                        let yPos = Double(item) * CELL_HEIGHT
                         
                         let cellAttributes = UICollectionViewLayoutAttributes(forCellWith: cellIndex)
                         cellAttributes.frame = CGRect(x: xPos, y: yPos, width: CELL_WIDTH, height: CELL_HEIGHT)
@@ -99,8 +99,8 @@ class BracketCollectionViewLayout: UICollectionViewLayout {
                 }
             }
         }
-        let contentWidth = Double(collectionView.numberOfItems(inSection: 0)) * CELL_WIDTH
-        let contentHeight = Double(collectionView.numberOfSections) * CELL_HEIGHT
+        let contentWidth = Double(collectionView.numberOfSections) * CELL_WIDTH
+        let contentHeight = Double(collectionView.numberOfItems(inSection: 0)) * CELL_HEIGHT
         self.contentSize = CGSize(width: contentWidth, height: contentHeight)
     }
     
