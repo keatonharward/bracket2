@@ -13,7 +13,6 @@ class ParticipantCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var label: UILabel!
     
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
@@ -26,7 +25,8 @@ class ParticipantCollectionViewCell: UICollectionViewCell {
     
     func setup() {
         self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderColor = Keys.shared.accent.cgColor
         self.layer.cornerRadius = 5.0
+        self.layer.backgroundColor = Keys.shared.alternateBackground.cgColor
     }
 }

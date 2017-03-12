@@ -19,6 +19,7 @@ class BracketCollectionViewController: UICollectionViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Do any additional setup after loading the view.
+        self.collectionView?.backgroundColor = Keys.shared.background
     }
 
     override func didReceiveMemoryWarning() {
