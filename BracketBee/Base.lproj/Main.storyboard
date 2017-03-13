@@ -142,7 +142,7 @@
                                         <rect key="frame" x="0.0" y="28" width="331" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eh8-IX-1eN" id="NJH-n8-2pc">
-                                            <rect key="frame" x="0.0" y="0.0" width="331" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="331" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="seed" translatesAutoresizingMaskIntoConstraints="NO" id="X0h-9B-5ui">
@@ -218,7 +218,7 @@
         <scene sceneID="YdR-kL-Elx">
             <objects>
                 <collectionViewController id="aIu-zX-35k" customClass="BracketCollectionViewController" customModule="BracketBee" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="vvQ-h9-TIg">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="vvQ-h9-TIg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -247,6 +247,31 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="label" destination="ERq-H7-xOd" id="aol-Ks-e1d"/>
+                                </connections>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="roundCell" id="QJK-sH-1QW" customClass="RoundLabelCollectionViewCell" customModule="BracketBee" customModuleProvider="target">
+                                <rect key="frame" x="65" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZh-uE-DBV">
+                                            <rect key="frame" x="3" y="0.0" width="47" height="50"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="XZh-uE-DBV" secondAttribute="trailing" id="bLK-h2-YXg"/>
+                                    <constraint firstAttribute="bottom" secondItem="XZh-uE-DBV" secondAttribute="bottom" id="fFH-fT-7dp"/>
+                                    <constraint firstItem="XZh-uE-DBV" firstAttribute="top" secondItem="QJK-sH-1QW" secondAttribute="top" id="rQr-zT-t0o"/>
+                                    <constraint firstItem="XZh-uE-DBV" firstAttribute="leading" secondItem="QJK-sH-1QW" secondAttribute="leading" constant="3" id="z2X-hT-sl4"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="label" destination="XZh-uE-DBV" id="6pe-rj-7T8"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
