@@ -17,7 +17,7 @@ extension MatchupNode {
     public var description: String {
         switch self {
         case let .node(left, value, right):
-            let returnString = "value: \(value), left = [ + \(left.description) + ], right = [ + \(right.description) + ]"
+            let returnString = "value: \(value), left = [\(left.description)], right = [\(right.description)]"
             return returnString
         case .empty:
             return ""
