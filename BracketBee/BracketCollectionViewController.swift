@@ -12,6 +12,9 @@ private let reuseIdentifier = "participantCell"
 
 class BracketCollectionViewController: UICollectionViewController {
     
+    var bracket: Bracket?
+    var rounds = 7
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,19 +34,22 @@ class BracketCollectionViewController: UICollectionViewController {
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 5
+        guard let teams = bracket?.teams else { return 7 }
+        rounds = BracketController.shared.findRounds(numberOfTeams: teams.count)
+        return rounds
     }
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0: return 17
-        case 1: return 9
-        case 2: return 5
-        case 3: return 3
-        case 4: return 2
-        default: return 50
+        if section == rounds - 1 {
+            return 2
         }
+        let repeats = (rounds - section - 1)
+        var gamesInRound = 1
+        for _ in 1...repeats {
+            gamesInRound *= 2
+        }
+        return gamesInRound + 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -53,7 +59,15 @@ class BracketCollectionViewController: UICollectionViewController {
                 print("Unable to cast collection view cell for round label")
                 return UICollectionViewCell()
             }
-            cell.label.text = "Round \(indexPath.section + 1)"
+            if indexPath.section == rounds - 1 {
+                cell.label.text = "Champion"
+            } else if indexPath.section == rounds - 2 {
+                cell.label.text = "Final"
+            } else if indexPath.section == rounds - 3 {
+                cell.label.text = "Semi-Final"
+            } else {
+                cell.label.text = "Round \(indexPath.section + 1)"
+            }
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? ParticipantCollectionViewCell else {

@@ -71,9 +71,9 @@ class BracketController {
         
         // Calculate the number of Bye's to add teams to the second round
         var numberOfByes: Int
-        let nthRootTestValue = Double(Double(1)/Double(rounds)) // Used to find the number of teams to the root of the number of rounds. If that value == 2, there are no bye's. (2, 4, 8, 16, 32, 64, 128 so on teams)
+        let nthRoot = Double(Double(1)/Double(rounds)) // Used to find the number of teams to the root of the number of rounds. If that value == 2, there are no bye's. (2, 4, 8, 16, 32, 64, 128 so on teams)
         
-        if pow(Double(teams.count), nthRootTestValue) == 2 {
+        if pow(Double(teams.count), nthRoot) == 2 {
             numberOfByes = 0
         } else {
             let maxGamesInFirstRound = Int(pow(Double(2), Double(rounds)))

@@ -31,7 +31,6 @@ class BracketCollectionViewLayout: UICollectionViewLayout {
         
         guard let collectionView = collectionView else {
             return }
-        
         let contentWidth = (Double(collectionView.numberOfSections) * cellWidth) + (Double(collectionView.numberOfSections - 1) * horizontalPadding)
         var contentHeight = 0.0
         var round1IsPlayIn = false
@@ -84,37 +83,14 @@ class BracketCollectionViewLayout: UICollectionViewLayout {
                         let cellIndex = IndexPath(item: item, section: section)
                         let xPos = (Double(section) * cellWidth) + (Double(section) * horizontalPadding)
                         var yPos: Double
-                        if section == 0 {
-                            if item == 0 {
-                                yPos = 0
-                            } else if !round1IsPlayIn {
-                                let cellSpread = bracketHeight / Double(collectionView.numberOfItems(inSection: section) - 1)
-                                yPos = (cellSpread * Double(item)) - (cellSpread / 2.0) + (headerHeight / 2)
-                            } else {
-                                // TODO: - figure out how to lay these first round games out in a way that positions them to play into the appropriate games
-                                yPos = (Double(item) * cellHeight) + (Double(item) * largestSectionPadding)
-                            }
-                        } else if section == 1 {
+                        
                             if item == 0 {
                                 yPos = 0
                             } else {
-                                if round1IsPlayIn {
-                                    yPos = (Double(item) * cellHeight) + (Double(item) * largestSectionPadding)
-                                } else {
-//                                    yPos = ((((contentHeight) / Double(collectionView.numberOfItems(inSection: section))) * Double(item)) + (Double(item) * cellHeight / 2))
-                                    let cellSpread = bracketHeight / Double(collectionView.numberOfItems(inSection: section) - 1)
-                                    yPos = (cellSpread * Double(item)) - (cellSpread / 2.0) + (headerHeight / 2)
-                                }
-                            }
-                        } else {
-                            if item == 0 {
-                                yPos = 0
-                            } else {
-//                                yPos = ((((contentHeight) / Double(collectionView.numberOfItems(inSection: section))) * Double(item)) + (Double(item) * cellHeight / 2))
                                 let cellSpread = bracketHeight / Double(collectionView.numberOfItems(inSection: section) - 1)
                                 yPos = (cellSpread * Double(item)) - (cellSpread / 2.0) + (headerHeight / 2)
                             }
-                        }
+
                         
                         let cellAttributes = UICollectionViewLayoutAttributes(forCellWith: cellIndex)
                         cellAttributes.frame = CGRect(x: xPos, y: yPos, width: cellWidth, height: cellHeight)
