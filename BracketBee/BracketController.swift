@@ -22,8 +22,7 @@
                 print("Error creating champion node, bracket was not layed out properly")
                 return
             }
-            print(champion.description)
-            print(champion.height)
+//            print(champion.description)
             let bracket = Bracket(name: name, seeded: seeded, teams: teams, champion: champion)
             let brokenDown = breakDownRounds(bracket: bracket)
             print(brokenDown)
@@ -129,7 +128,7 @@
         }
         
         func breakDownRounds(bracket: Bracket) -> [Int: [String?]] {
-            var round = bracket.champion.height
+            var round = findRounds(numberOfTeams: bracket.teams.count)
             var previousRoundArray = [MatchupNode<String>?]()
             previousRoundArray.append(bracket.champion)
             var allRoundsDictionary = [Int: [String?]]()
@@ -142,7 +141,7 @@
                 var teamNamesArray = [String?]()
                 for matchup in previousRoundArray {
                     if let matchup = matchup {
-                        if let leftTeam = matchup.left {
+                        let leftTeam = matchup.left
                             switch leftTeam {
                             case .empty:
                                 roundArray.append(nil)
@@ -151,11 +150,8 @@
                                 roundArray.append(leftTeam)
                                 teamNamesArray.append(leftTeam.winner)
                             }
-                        } else {
-                            roundArray.append(nil)
-                            teamNamesArray.append(nil)
-                        }
-                        if let rightTeam = matchup.right {
+                        
+                        let rightTeam = matchup.right
                             switch rightTeam {
                             case .empty:
                                 roundArray.append(nil)
@@ -165,10 +161,6 @@
                                 teamNamesArray.append(rightTeam.winner)
                             }
                         } else {
-                            roundArray.append(nil)
-                            teamNamesArray.append(nil)
-                        }
-                    } else {
                         roundArray.append(nil)
                         roundArray.append(nil)
                         teamNamesArray.append(nil)

@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         
         let testBracket: Bracket = BracketController.shared.brackets[0]
         
-        print(testBracket.champion.description)
+//        print(testBracket.champion.description)
     }
 
 

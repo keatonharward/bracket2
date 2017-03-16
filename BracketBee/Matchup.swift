@@ -8,11 +8,11 @@
 
 import Foundation
 
-public enum MatchupNode<T: Comparable> {
-    indirect case node(MatchupNode<T>, T, MatchupNode<T>)
+public enum MatchupNode<String: Comparable> {
+    indirect case node(MatchupNode<String>, String, MatchupNode<String>)
     case empty
     
-    private func newTreeWithInsertedValue(winnerValue: T) -> MatchupNode {
+    private func newTreeWithInsertedValue(winnerValue: String) -> MatchupNode {
         switch self {
         case .empty:
             return .node(.empty, winnerValue, .empty)
@@ -21,71 +21,65 @@ public enum MatchupNode<T: Comparable> {
             return .node(left, winnerValue, right)
         }
     }
-}
-
-extension MatchupNode {
-    public var description: String {
-        switch self {
-        case let .node(left, value, right):
-            let returnString = "value: \(value), left = [\(left.description)], right = [\(right.description)]"
-            return returnString
-        case .empty:
-            return ""
-        }
+    mutating func changeNode(newValue: String) {
+        self = newTreeWithInsertedValue(winnerValue: newValue)
     }
 }
 
-extension MatchupNode: BinaryTree {
-    public var left: MatchupNode? {
-        if case let .node(left, _, _) = self {
-            if case .empty = left { return nil }
-            return left
+//extension MatchupNode {
+//    public var description: String {
+//        switch self {
+//        case let .node(left, value, right):
+//            let returnString = "value: \(value), left = [\(left.description)], right = [\(right.description)]"
+//            return returnString
+//        case .empty:
+//            return ""
+//        }
+//    }
+//}
+
+extension MatchupNode: Equatable {
+    
+    public var left: MatchupNode<String> {
+        get {
+            if case let .node(left, _, _) = self {
+                if case .empty = left { return .empty }
+                return left
+            }
+            return .empty
         }
-        return nil
-    }
-    public var right: MatchupNode? {
-        if case let .node(_, _, right) = self {
-            if case .empty = right { return nil }
-            return right
+        set(newWinner) {
+            self = newWinner
         }
-        return nil
     }
-    public var winner: T {
+    public var right: MatchupNode<String> {
+        get {
+            if case let .node(_, _, right) = self {
+                if case .empty = right { return .empty }
+                return right
+            }
+            return .empty
+        }
+        set(newWinner) {
+            self = newWinner
+        }
+    }
+    public var winner: String {
         if case let .node(_, value, _) = self {
             return value
         }
-        fatalError("element can not be empty")
+        fatalError("winner value can not be empty")
     }
 }
 
-public protocol BinaryTree: Equatable {
-    associatedtype Winner: Comparable
-    var winner: Winner { get }
-    var left: Self? { get }
-    var right: Self? { get }
-}
+//public protocol BinaryTree: Equatable {
+//    var winner: T { get set }
+//    var left: Self? { get set }
+//    var right: Self? { get set }
+//}
 
 extension MatchupNode {
     public static func ==(lhs: MatchupNode, rhs: MatchupNode) -> Bool {
         return (lhs.winner == rhs.winner) && lhs.left == rhs.left && lhs.right == rhs.right
     }
-    
-    public var height: Int {
-        var (leftHeight, rightHeight) = (0, 0)
-        if let left = left { leftHeight = left.height + 1 }
-        if let right = right { rightHeight = right.height + 1 }
-        let height = Swift.max(leftHeight, rightHeight)
-        return height
-    }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
 }
