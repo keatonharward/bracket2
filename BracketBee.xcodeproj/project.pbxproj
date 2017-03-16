@@ -11,6 +11,8 @@
 		531FCC0D1E731D29000AA223 /* BracketCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531FCC0C1E731D29000AA223 /* BracketCollectionViewController.swift */; };
 		531FCC0F1E732476000AA223 /* BracketCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531FCC0E1E732476000AA223 /* BracketCollectionViewLayout.swift */; };
 		532CC2A21E75F759002CD4E1 /* RoundLabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532CC2A11E75F759002CD4E1 /* RoundLabelCollectionViewCell.swift */; };
+		532CC2C41E79FD96002CD4E1 /* NoTeamCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532CC2C31E79FD96002CD4E1 /* NoTeamCollectionViewCell.swift */; };
+		532CC2C61E79FDA3002CD4E1 /* TBDCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532CC2C51E79FDA3002CD4E1 /* TBDCollectionViewCell.swift */; };
 		533088F91E4E7CA6002B3AD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533088F81E4E7CA6002B3AD3 /* AppDelegate.swift */; };
 		533088FB1E4E7CA6002B3AD3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533088FA1E4E7CA6002B3AD3 /* ViewController.swift */; };
 		533088FE1E4E7CA6002B3AD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 533088FC1E4E7CA6002B3AD3 /* Main.storyboard */; };
@@ -50,6 +52,8 @@
 		531FCC0C1E731D29000AA223 /* BracketCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketCollectionViewController.swift; sourceTree = "<group>"; };
 		531FCC0E1E732476000AA223 /* BracketCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketCollectionViewLayout.swift; sourceTree = "<group>"; };
 		532CC2A11E75F759002CD4E1 /* RoundLabelCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundLabelCollectionViewCell.swift; sourceTree = "<group>"; };
+		532CC2C31E79FD96002CD4E1 /* NoTeamCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoTeamCollectionViewCell.swift; sourceTree = "<group>"; };
+		532CC2C51E79FDA3002CD4E1 /* TBDCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBDCollectionViewCell.swift; sourceTree = "<group>"; };
 		533088F51E4E7CA6002B3AD3 /* BracketBee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BracketBee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		533088F81E4E7CA6002B3AD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		533088FA1E4E7CA6002B3AD3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +173,8 @@
 				538FA02B1E6E34B6000B778B /* ParticipantTableViewCell.swift */,
 				531FCC0A1E73166F000AA223 /* ParticipantCollectionViewCell.swift */,
 				532CC2A11E75F759002CD4E1 /* RoundLabelCollectionViewCell.swift */,
+				532CC2C31E79FD96002CD4E1 /* NoTeamCollectionViewCell.swift */,
+				532CC2C51E79FDA3002CD4E1 /* TBDCollectionViewCell.swift */,
 				531FCC0E1E732476000AA223 /* BracketCollectionViewLayout.swift */,
 			);
 			name = Views;
@@ -337,11 +343,13 @@
 				53BDDD7F1E6DD19500ADDE3F /* Keys.swift in Sources */,
 				531FCC0F1E732476000AA223 /* BracketCollectionViewLayout.swift in Sources */,
 				538FA0281E6DE249000B778B /* CreateBracketViewController.swift in Sources */,
+				532CC2C61E79FDA3002CD4E1 /* TBDCollectionViewCell.swift in Sources */,
 				531FCC0B1E73166F000AA223 /* ParticipantCollectionViewCell.swift in Sources */,
 				531FCC0D1E731D29000AA223 /* BracketCollectionViewController.swift in Sources */,
 				538FA02C1E6E34B6000B778B /* ParticipantTableViewCell.swift in Sources */,
 				532CC2A21E75F759002CD4E1 /* RoundLabelCollectionViewCell.swift in Sources */,
 				5330892F1E4FB430002B3AD3 /* BracketController.swift in Sources */,
+				532CC2C41E79FD96002CD4E1 /* NoTeamCollectionViewCell.swift in Sources */,
 				53BDDD811E6DD3D500ADDE3F /* BracketListTableViewController.swift in Sources */,
 				5330892C1E4FABA2002B3AD3 /* Matchup.swift in Sources */,
 			);

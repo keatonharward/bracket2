@@ -13,15 +13,18 @@ private let reuseIdentifier = "participantCell"
 class BracketCollectionViewController: UICollectionViewController {
     
     var bracket: Bracket?
-    var rounds = 7
+    var rounds = 0
+    var roundsDictionary = [Int: [String?]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        // MARK: - Test bracket
+        let tempTeams = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"]
+        guard let tempBracket = BracketController.shared.layoutBracket(teams: tempTeams, seeded: true) else { return }
+        bracket = Bracket(name: "Test", seeded: true, teams: tempTeams, champion: tempBracket)
+        roundsDictionary = BracketController.shared.breakDownRounds(bracket: bracket!)
         
-        // Do any additional setup after loading the view.
         self.collectionView?.backgroundColor = Keys.shared.background
     }
     
@@ -34,8 +37,8 @@ class BracketCollectionViewController: UICollectionViewController {
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        guard let teams = bracket?.teams else { return 7 }
-        rounds = BracketController.shared.findRounds(numberOfTeams: teams.count)
+        guard let height = roundsDictionary.keys.max() else { return 0 }
+        rounds = height + 1
         return rounds
     }
     
@@ -70,13 +73,33 @@ class BracketCollectionViewController: UICollectionViewController {
             }
             return cell
         } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? ParticipantCollectionViewCell else {
-                print("Unable to cast collection view cell to custom type.")
+            guard let stringArray = roundsDictionary[indexPath.section] else {
+                print("Unable to fetch the team array from the round dictionary for round \(indexPath.section)")
                 return UICollectionViewCell()
             }
-            
-            cell.label.text = "Sec \(indexPath.section)/Item \(indexPath.item)"
-            return cell
+            let cellString = stringArray[indexPath.row - 1]
+            if cellString == nil {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "noTeamCell", for: indexPath) as? NoTeamCollectionViewCell else {
+                    print("Unable to cast collection view cell to custom type.")
+                    return UICollectionViewCell()
+                }
+                return cell
+            } else if cellString == "TBD" {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TBDCell", for: indexPath) as? TBDCollectionViewCell else {
+                    print("Unable to cast collection view cell to custom type.")
+                    return UICollectionViewCell()
+                }
+                return cell
+            } else {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? ParticipantCollectionViewCell else {
+                    print("Unable to cast collection view cell to custom type.")
+                    return UICollectionViewCell()
+                }
+                
+                cell.label.text = cellString
+                
+                return cell
+            }
         }
     }
     
