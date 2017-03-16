@@ -22,13 +22,12 @@ class BracketCollectionViewController: UICollectionViewController {
         // MARK: - Test bracket
         let tempTeams = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"]
         var tempBracket = BracketController.shared.layoutBracket(teams: tempTeams, seeded: true)
-        tempBracket?.changeNode(newValue: "TEST")
-        var bracket2 = tempBracket?.left
-        bracket2?.changeNode(newValue: "TEST2")
-        tempBracket?.left = bracket2!
-        guard let test = tempBracket else { return }
+        tempBracket.changeNode(newValue: "TEST")
+        var bracket2 = tempBracket.left
+        bracket2.changeNode(newValue: "TEST2")
+        tempBracket.left = bracket2
 //        print(test.description)
-        bracket = Bracket(name: "Test", seeded: true, teams: tempTeams, champion: test)
+        bracket = Bracket(name: "Test", seeded: true, teams: tempTeams, champion: tempBracket)
         roundsDictionary = BracketController.shared.breakDownRounds(bracket: bracket!)
         
         self.collectionView?.backgroundColor = Keys.shared.background

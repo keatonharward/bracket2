@@ -17,12 +17,8 @@
         
         func addBracket(name: String, seeded: Bool, teams: [String]){
             
-            guard let champion = self.layoutBracket(teams: teams, seeded: seeded) else {
-                // TODO: -
-                print("Error creating champion node, bracket was not layed out properly")
-                return
-            }
-//            print(champion.description)
+            let champion = self.layoutBracket(teams: teams, seeded: seeded)
+            //            print(champion.description)
             let bracket = Bracket(name: name, seeded: seeded, teams: teams, champion: champion)
             let brokenDown = breakDownRounds(bracket: bracket)
             print(brokenDown)
@@ -30,11 +26,11 @@
             // TODO: - save me
         }
         
-        func layoutBracket(teams: [String], seeded: Bool) -> MatchupNode<String>?{
+        func layoutBracket(teams: [String], seeded: Bool) -> MatchupNode<String>{
             
             let teamNodes = seedTeamsToNodes(teams: teams, seeded: seeded)
             
-            guard let champion = findMatchups(teams: teamNodes) else { return nil }
+            let champion = findMatchups(teams: teamNodes)
             return champion
         }
         
@@ -66,7 +62,7 @@
             return shuffledTeams
         }
         
-        func findMatchups(teams: [MatchupNode<String>]) -> MatchupNode<String>? {
+        func findMatchups(teams: [MatchupNode<String>]) -> MatchupNode<String> {
             //        let totalGames = (teams.count - 1)
             let rounds = findRounds(numberOfTeams: teams.count)
             var allNodes = teams
@@ -92,24 +88,28 @@
                 while numberOfByes > 0 {
                     numberOfByes -= 1
                     remainingMatchups -= 1
-                    guard let team = allNodes.first else { return nil }
-                    allNodes.removeFirst()
-                    round.append(team)
+                    if let team = allNodes.first {
+                        allNodes.removeFirst()
+                        round.append(team)
+                    }
                 }
                 
                 // This loop combines all teams until there is only a champion node
                 while remainingMatchups > 0 {
                     remainingMatchups -= 1
-                    guard let firstNode = allNodes.first, let secondNode = allNodes.popLast() else { return nil }
-                    
-                    let matchup = MatchupNode.node(firstNode, "TBD", secondNode)
-                    allNodes.removeFirst()
-                    round.append(matchup)
+                    if let firstNode = allNodes.first {
+                        if let secondNode = allNodes.popLast() {
+                            
+                            let matchup = MatchupNode.node(firstNode, "TBD", secondNode)
+                            allNodes.removeFirst()
+                            round.append(matchup)
+                        }
+                    }
                 }
                 allNodes = round
                 remainingMatchups = allNodes.count / 2
             }
-            let gameWithAllChildren = allNodes.first
+            guard let gameWithAllChildren = allNodes.first else { return allNodes.first! }
             return gameWithAllChildren
         }
         
@@ -142,25 +142,25 @@
                 for matchup in previousRoundArray {
                     if let matchup = matchup {
                         let leftTeam = matchup.left
-                            switch leftTeam {
-                            case .empty:
-                                roundArray.append(nil)
-                                teamNamesArray.append(nil)
-                            case .node:
-                                roundArray.append(leftTeam)
-                                teamNamesArray.append(leftTeam.winner)
-                            }
+                        switch leftTeam {
+                        case .empty:
+                            roundArray.append(nil)
+                            teamNamesArray.append(nil)
+                        case .node:
+                            roundArray.append(leftTeam)
+                            teamNamesArray.append(leftTeam.winner)
+                        }
                         
                         let rightTeam = matchup.right
-                            switch rightTeam {
-                            case .empty:
-                                roundArray.append(nil)
-                                teamNamesArray.append(nil)
-                            case .node:
-                                roundArray.append(rightTeam)
-                                teamNamesArray.append(rightTeam.winner)
-                            }
-                        } else {
+                        switch rightTeam {
+                        case .empty:
+                            roundArray.append(nil)
+                            teamNamesArray.append(nil)
+                        case .node:
+                            roundArray.append(rightTeam)
+                            teamNamesArray.append(rightTeam.winner)
+                        }
+                    } else {
                         roundArray.append(nil)
                         roundArray.append(nil)
                         teamNamesArray.append(nil)
