@@ -52,7 +52,8 @@ class BracketCollectionViewLayout: UICollectionViewLayout {
         self.contentSize = CGSize(width: contentWidth, height: contentHeight)
         
         if !dataSourceDidUpdate {
-            let yOffset = collectionView.contentOffset.y
+            // TODO: - fix this so it will add the actual height of the nav bar to the offset when rotating.
+            let yOffset = collectionView.contentOffset.y + 64
             
             if collectionView.numberOfSections > 0 {
                 for section in 0...collectionView.numberOfSections - 1 {

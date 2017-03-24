@@ -127,47 +127,41 @@
             return numberOfRounds
         }
         
-        func breakDownRounds(bracket: Bracket) -> [Int: [String?]] {
+        func breakDownRounds(bracket: Bracket) -> [Int: [MatchupNode<String>?]] {
             var round = findRounds(numberOfTeams: bracket.teams.count)
             var previousRoundArray = [MatchupNode<String>?]()
             previousRoundArray.append(bracket.champion)
-            var allRoundsDictionary = [Int: [String?]]()
-            allRoundsDictionary.updateValue([bracket.champion.winner], forKey: round)
+            var allRoundsDictionary = [Int: [MatchupNode<String>?]]()
+            allRoundsDictionary.updateValue([bracket.champion], forKey: round)
             let passes = round
             
             for _ in 1...passes {
                 round -= 1
                 var roundArray = [MatchupNode<String>?]()
-                var teamNamesArray = [String?]()
                 for matchup in previousRoundArray {
                     if let matchup = matchup {
                         let leftTeam = matchup.left
                         switch leftTeam {
                         case .empty:
                             roundArray.append(nil)
-                            teamNamesArray.append(nil)
                         case .node:
                             roundArray.append(leftTeam)
-                            teamNamesArray.append(leftTeam.winner)
                         }
                         
                         let rightTeam = matchup.right
                         switch rightTeam {
                         case .empty:
                             roundArray.append(nil)
-                            teamNamesArray.append(nil)
                         case .node:
                             roundArray.append(rightTeam)
-                            teamNamesArray.append(rightTeam.winner)
                         }
                     } else {
                         roundArray.append(nil)
                         roundArray.append(nil)
-                        teamNamesArray.append(nil)
-                        teamNamesArray.append(nil)
+
                     }
                 }
-                allRoundsDictionary.updateValue(teamNamesArray, forKey: round)
+                allRoundsDictionary.updateValue(roundArray, forKey: round)
                 previousRoundArray = roundArray
             }
             

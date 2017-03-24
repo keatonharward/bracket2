@@ -12,23 +12,29 @@ private let reuseIdentifier = "participantCell"
 
 class BracketCollectionViewController: UICollectionViewController {
     
-    var bracket: Bracket?
+    var bracket: Bracket? {
+        didSet {
+            if let bracket = bracket {
+                roundsDictionary = BracketController.shared.breakDownRounds(bracket: bracket)
+            }
+        }
+    }
     var rounds = 0
-    var roundsDictionary = [Int: [String?]]()
+    var roundsDictionary = [Int: [MatchupNode<String>?]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // MARK: - Test bracket
-        let tempTeams = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"]
-        var tempBracket = BracketController.shared.layoutBracket(teams: tempTeams, seeded: true)
-        tempBracket.changeNode(newValue: "TEST")
-        var bracket2 = tempBracket.left
-        bracket2.changeNode(newValue: "TEST2")
-        tempBracket.left = bracket2
-//        print(test.description)
-        bracket = Bracket(name: "Test", seeded: true, teams: tempTeams, champion: tempBracket)
-        roundsDictionary = BracketController.shared.breakDownRounds(bracket: bracket!)
+        //        let tempTeams = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"]
+        //        var tempBracket = BracketController.shared.layoutBracket(teams: tempTeams, seeded: true)
+        //        tempBracket.changeNode(newValue: "TEST")
+        //        var bracket2 = tempBracket.left
+        //        bracket2.changeNode(newValue: "TEST2")
+        //        tempBracket.left = bracket2
+        ////        print(test.description)
+        //        bracket = Bracket(name: "Test", seeded: true, teams: tempTeams, champion: tempBracket)
+        //        roundsDictionary = BracketController.shared.breakDownRounds(bracket: bracket!)
         
         self.collectionView?.backgroundColor = Keys.shared.background
     }
@@ -41,8 +47,8 @@ class BracketCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        guard let height = roundsDictionary.keys.max() else { return 0 }
+        guard let bracket = bracket else { return 0 }
+        let height = BracketController.shared.findRounds(numberOfTeams: bracket.teams.count)
         rounds = height + 1
         return rounds
     }
@@ -82,7 +88,7 @@ class BracketCollectionViewController: UICollectionViewController {
                 print("Unable to fetch the team array from the round dictionary for round \(indexPath.section)")
                 return UICollectionViewCell()
             }
-            let cellString = stringArray[indexPath.row - 1]
+            let cellString = stringArray[indexPath.row - 1]?.winner
             if cellString == nil {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "noTeamCell", for: indexPath) as? NoTeamCollectionViewCell else {
                     print("Unable to cast collection view cell to custom type.")
