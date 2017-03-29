@@ -13,9 +13,9 @@ class BracketListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.separatorColor = Keys.shared.accent
-        self.tableView.backgroundColor = Keys.shared.background
-        
+        tableView.separatorColor = Keys.shared.accent
+        tableView.backgroundColor = Keys.shared.background
+        self.navigationController?.navigationBar.tintColor = Keys.shared.fontColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,6 +94,7 @@ class BracketListTableViewController: UITableViewController {
                 if let destinationVC = segue.destination as? BracketCollectionViewController {
                     let bracket = BracketController.shared.brackets[indexPath.row]
                     destinationVC.bracket = bracket
+                    destinationVC.title = bracket.name
                 }
             }
         }

@@ -17,6 +17,7 @@ class CreateBracketViewController: UIViewController {
     
     @IBOutlet weak var bracketNameTextField: UITextField!
     @IBOutlet weak var seedingSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var addParticipantButton: UIButton!
     @IBOutlet weak var createBracketButton: UIButton!
     @IBOutlet weak var participantTableView: UITableView!
     @IBOutlet weak var tableviewBackgroundView: UIView!
@@ -75,7 +76,6 @@ class CreateBracketViewController: UIViewController {
             
         }
         
-        
         addParticipantAlert.addAction(cancelAction)
         addParticipantAlert.addAction(addAnotherAction)
         addParticipantAlert.addAction(addAndComplete)
@@ -109,7 +109,7 @@ class CreateBracketViewController: UIViewController {
         bracketNameTextField.backgroundColor = Keys.shared.alternateBackground
         bracketNameTextField.textColor = Keys.shared.fontColor
         bracketNameTextField.rightViewMode = UITextFieldViewMode.always
-        let textFieldIconView = UIImageView(frame: CGRect(x: 275, y: bracketNameTextField.frame.origin.y + (bracketNameTextField.frame.height / 2), width: 55, height: 53))
+        let textFieldIconView = UIImageView(frame: CGRect(x: 275, y: bracketNameTextField.frame.origin.y + (bracketNameTextField.frame.height), width: 55, height: 53))
         textFieldIconView.contentMode = UIViewContentMode.bottomRight
         textFieldIconView.image = #imageLiteral(resourceName: "nametag")
         bracketNameTextField.rightView = textFieldIconView
@@ -117,25 +117,29 @@ class CreateBracketViewController: UIViewController {
         // set up segmented control for seeding
         seedingSegmentedControl.tintColor = Keys.shared.accent
         seedingSegmentedControl.backgroundColor = Keys.shared.alternateBackground
-        seedingSegmentedControl.removeBorders()
         
         // TODO: - round the corners of everything in this view.
         // set up tableView
         
+//        participantTableView.superview?.layer.cornerRadius = 5.0
         participantTableView.separatorColor = Keys.shared.accent
         participantTableView.backgroundColor = Keys.shared.alternateBackground
         tableviewBackgroundView.backgroundColor = Keys.shared.alternateBackground
         
-        // set up add bracket button
+        // set up add bracket & add participant buttons
         createBracketButton.backgroundColor = Keys.shared.accent
         createBracketButton.titleLabel?.textColor = Keys.shared.fontColor
         createBracketButton.layer.cornerRadius = 5.0
+
+        
+        addParticipantButton.backgroundColor = Keys.shared.accent
+        addParticipantButton.titleLabel?.textColor = Keys.shared.fontColor
+        addParticipantButton.layer.cornerRadius = 5.0
         
         // Dismiss keyboard
         let tap = UITapGestureRecognizer(target: self, action: #selector(CreateBracketViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         tap.cancelsTouchesInView = false
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -153,6 +157,7 @@ class CreateBracketViewController: UIViewController {
             if let destinationVC = segue.destination as? BracketCollectionViewController {
                 let bracket = BracketController.shared.brackets.last
                 destinationVC.bracket = bracket
+                destinationVC.title = bracket?.name
             }
         }
      }
@@ -162,7 +167,6 @@ class CreateBracketViewController: UIViewController {
 extension CreateBracketViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      
         return participants.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

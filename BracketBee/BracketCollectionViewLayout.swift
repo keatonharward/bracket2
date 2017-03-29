@@ -21,6 +21,8 @@ class BracketCollectionViewLayout: UICollectionViewLayout {
     
     var dataSourceDidUpdate = true
     
+    static var delegate: BracketCollectionViewLayoutDelegate?
+    
     
     // MARK: - Required layout methods
     override var collectionViewContentSize: CGSize {
@@ -53,7 +55,8 @@ class BracketCollectionViewLayout: UICollectionViewLayout {
         
         if !dataSourceDidUpdate {
             // TODO: - fix this so it will add the actual height of the nav bar to the offset when rotating.
-            let yOffset = collectionView.contentOffset.y + 64
+            guard let padding = BracketCollectionViewLayout.delegate?.getHeight() else { return }
+            let yOffset = collectionView.contentOffset.y + padding
             
             if collectionView.numberOfSections > 0 {
                 for section in 0...collectionView.numberOfSections - 1 {
@@ -147,4 +150,8 @@ class BracketCollectionViewLayout: UICollectionViewLayout {
     //    override func initialLayoutAttributesForAppearingDecorationElement(ofKind elementKind: String, at decorationIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
     //        <#code#>
     //    }
+}
+
+protocol BracketCollectionViewLayoutDelegate {
+    func getHeight() -> CGFloat
 }

@@ -14,7 +14,7 @@
         <scene sceneID="vIc-QD-Tf3">
             <objects>
                 <tableViewController id="l5i-0T-nLT" customClass="BracketListTableViewController" customModule="BracketBee" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Sld-FO-E2U">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Sld-FO-E2U">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -24,7 +24,7 @@
                             <color key="backgroundColor" red="0.14338690042495728" green="0.14352902770042419" blue="0.14340889453887939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="bracketCell" textLabel="BOg-a9-s28" detailTextLabel="V3Y-72-kTb" style="IBUITableViewCellStyleSubtitle" id="FPA-Ef-GXo">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="bracketCell" textLabel="BOg-a9-s28" style="IBUITableViewCellStyleDefault" id="FPA-Ef-GXo">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FPA-Ef-GXo" id="XEA-0c-BBx">
@@ -32,16 +32,9 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BOg-a9-s28">
-                                            <rect key="frame" x="20" y="4" width="34" height="21"/>
+                                            <rect key="frame" x="20" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="V3Y-72-kTb">
-                                            <rect key="frame" x="20" y="25" width="44" height="15"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -99,27 +92,27 @@
                                     <constraint firstAttribute="height" constant="52" id="9MN-Cm-yzt"/>
                                 </constraints>
                                 <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="163" minY="14" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Create Bracket" image="add bracket"/>
+                                <state key="normal" title="Create Bracket"/>
                                 <connections>
                                     <action selector="createBracketButtonTapped:" destination="GMH-gd-rNn" eventType="touchUpInside" id="EzE-sm-y3M"/>
                                     <segue destination="aIu-zX-35k" kind="show" identifier="fromCreateBracket" id="wGC-oJ-Hu2"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ano-eX-Q36">
+                            <button opaque="NO" contentMode="bottomRight" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ano-eX-Q36">
                                 <rect key="frame" x="22" y="223" width="331" height="52"/>
                                 <color key="backgroundColor" red="0.0098299114029999999" green="0.84820491080000004" blue="0.99993842840000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="52" id="Zqt-Q6-ZkB"/>
-                                    <constraint firstAttribute="height" constant="52" id="z8i-1A-lVU"/>
                                 </constraints>
                                 <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="163" minY="14" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Add Participant" image="add participant"/>
+                                <state key="normal" title="Add Participant"/>
                                 <connections>
                                     <action selector="addParticipantButtonTapped:" destination="GMH-gd-rNn" eventType="touchUpInside" id="gTe-Pt-qW7"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add participant" translatesAutoresizingMaskIntoConstraints="NO" id="9Gb-hQ-MeM">
+                                <rect key="frame" x="305" y="236" width="48" height="39"/>
+                            </imageView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="n5k-ve-DTU">
                                 <rect key="frame" x="22" y="156" width="331" height="53"/>
                                 <constraints>
@@ -146,7 +139,7 @@
                                         <rect key="frame" x="0.0" y="28" width="331" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eh8-IX-1eN" id="NJH-n8-2pc">
-                                            <rect key="frame" x="0.0" y="0.0" width="331" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="331" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="seed" translatesAutoresizingMaskIntoConstraints="NO" id="X0h-9B-5ui">
@@ -181,6 +174,13 @@
                                     <outlet property="delegate" destination="GMH-gd-rNn" id="fco-6q-d6j"/>
                                 </connections>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add bracket" translatesAutoresizingMaskIntoConstraints="NO" id="bKO-D5-OYy">
+                                <rect key="frame" x="299" y="567" width="54" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="0O2-9c-Jsk"/>
+                                    <constraint firstAttribute="width" constant="54" id="1go-oC-cvY"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -189,8 +189,10 @@
                             <constraint firstItem="n5k-ve-DTU" firstAttribute="leading" secondItem="UwY-gx-WZE" secondAttribute="leadingMargin" constant="6" id="9Yh-I1-R92"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Mbn-ce-lJL" secondAttribute="trailing" constant="6" id="Bcn-If-jF7"/>
                             <constraint firstItem="ano-eX-Q36" firstAttribute="leading" secondItem="UwY-gx-WZE" secondAttribute="leadingMargin" constant="6" id="G2H-35-8wp"/>
+                            <constraint firstItem="jxi-4Z-VlQ" firstAttribute="top" secondItem="9Gb-hQ-MeM" secondAttribute="bottom" constant="15" id="HOj-WN-vjY"/>
                             <constraint firstItem="jxi-4Z-VlQ" firstAttribute="top" secondItem="ano-eX-Q36" secondAttribute="bottom" constant="15" id="Jbj-nj-NOH"/>
                             <constraint firstItem="ToR-JI-qdP" firstAttribute="leading" secondItem="UwY-gx-WZE" secondAttribute="leadingMargin" constant="6" id="KKa-Zd-c7A"/>
+                            <constraint firstItem="XCd-rr-Iaw" firstAttribute="top" secondItem="bKO-D5-OYy" secondAttribute="bottom" constant="4" id="MLu-AH-ZFp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="n5k-ve-DTU" secondAttribute="trailing" constant="6" id="MSe-eS-IgL"/>
                             <constraint firstItem="ano-eX-Q36" firstAttribute="top" secondItem="n5k-ve-DTU" secondAttribute="bottom" constant="15" id="OWh-TB-ySl"/>
                             <constraint firstAttribute="trailingMargin" secondItem="n5k-ve-DTU" secondAttribute="trailing" constant="6" id="UCv-wF-ZmK"/>
@@ -199,14 +201,17 @@
                             <constraint firstItem="ToR-JI-qdP" firstAttribute="top" secondItem="jxi-4Z-VlQ" secondAttribute="bottom" constant="15" id="ZxF-9f-lbM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jxi-4Z-VlQ" secondAttribute="trailing" constant="6" id="bR4-I1-7f7"/>
                             <constraint firstItem="Mbn-ce-lJL" firstAttribute="leading" secondItem="UwY-gx-WZE" secondAttribute="leadingMargin" constant="6" id="h2T-Op-r39"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bKO-D5-OYy" secondAttribute="trailing" constant="6" id="kZc-BP-IbK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ano-eX-Q36" secondAttribute="trailing" constant="6" id="kfw-4h-ONF"/>
                             <constraint firstItem="n5k-ve-DTU" firstAttribute="leading" secondItem="UwY-gx-WZE" secondAttribute="leadingMargin" constant="6" id="mwi-cS-vNE"/>
                             <constraint firstItem="Mbn-ce-lJL" firstAttribute="top" secondItem="8Qh-hp-r7b" secondAttribute="bottom" constant="25" id="obe-IY-bzG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9Gb-hQ-MeM" secondAttribute="trailing" constant="6" id="xlJ-7S-xbj"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="addParticipantButton" destination="ano-eX-Q36" id="eIA-fq-bl9"/>
                         <outlet property="bracketNameTextField" destination="Mbn-ce-lJL" id="N3I-47-RWm"/>
                         <outlet property="createBracketButton" destination="ToR-JI-qdP" id="gJe-vU-EQ2"/>
                         <outlet property="participantTableView" destination="jxi-4Z-VlQ" id="1HO-yZ-L7C"/>
@@ -335,6 +340,6 @@
         <image name="seed" width="29" height="29"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wGC-oJ-Hu2"/>
+        <segue reference="vDB-H6-uZa"/>
     </inferredMetricsTieBreakers>
 </document>

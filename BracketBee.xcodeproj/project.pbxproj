@@ -14,7 +14,6 @@
 		532CC2C41E79FD96002CD4E1 /* NoTeamCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532CC2C31E79FD96002CD4E1 /* NoTeamCollectionViewCell.swift */; };
 		532CC2C61E79FDA3002CD4E1 /* TBDCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532CC2C51E79FDA3002CD4E1 /* TBDCollectionViewCell.swift */; };
 		533088F91E4E7CA6002B3AD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533088F81E4E7CA6002B3AD3 /* AppDelegate.swift */; };
-		533088FB1E4E7CA6002B3AD3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533088FA1E4E7CA6002B3AD3 /* ViewController.swift */; };
 		533088FE1E4E7CA6002B3AD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 533088FC1E4E7CA6002B3AD3 /* Main.storyboard */; };
 		533089011E4E7CA6002B3AD3 /* BracketBee.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 533088FF1E4E7CA6002B3AD3 /* BracketBee.xcdatamodeld */; };
 		533089031E4E7CA6002B3AD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 533089021E4E7CA6002B3AD3 /* Assets.xcassets */; };
@@ -56,7 +55,6 @@
 		532CC2C51E79FDA3002CD4E1 /* TBDCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBDCollectionViewCell.swift; sourceTree = "<group>"; };
 		533088F51E4E7CA6002B3AD3 /* BracketBee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BracketBee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		533088F81E4E7CA6002B3AD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		533088FA1E4E7CA6002B3AD3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		533088FD1E4E7CA6002B3AD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		533089001E4E7CA6002B3AD3 /* BracketBee.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BracketBee.xcdatamodel; sourceTree = "<group>"; };
 		533089021E4E7CA6002B3AD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				533088F81E4E7CA6002B3AD3 /* AppDelegate.swift */,
-				533088FA1E4E7CA6002B3AD3 /* ViewController.swift */,
 				5330892E1E4FB430002B3AD3 /* BracketController.swift */,
 				5330892D1E4FB416002B3AD3 /* Models */,
 				53BDDD821E6DD3E200ADDE3F /* View Controller */,
@@ -337,7 +334,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5330892A1E4FAB9B002B3AD3 /* Bracket.swift in Sources */,
-				533088FB1E4E7CA6002B3AD3 /* ViewController.swift in Sources */,
 				533088F91E4E7CA6002B3AD3 /* AppDelegate.swift in Sources */,
 				533089011E4E7CA6002B3AD3 /* BracketBee.xcdatamodeld in Sources */,
 				53BDDD7F1E6DD19500ADDE3F /* Keys.swift in Sources */,

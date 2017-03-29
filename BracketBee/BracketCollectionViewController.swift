@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "participantCell"
 
-class BracketCollectionViewController: UICollectionViewController {
+class BracketCollectionViewController: UICollectionViewController, BracketCollectionViewLayoutDelegate {
     
     var bracket: Bracket? {
         didSet {
@@ -19,6 +19,7 @@ class BracketCollectionViewController: UICollectionViewController {
             }
         }
     }
+    
     var rounds = 0
     var roundsDictionary = [Int: [MatchupNode<String>?]]()
     
@@ -37,6 +38,11 @@ class BracketCollectionViewController: UICollectionViewController {
         //        roundsDictionary = BracketController.shared.breakDownRounds(bracket: bracket!)
         
         self.collectionView?.backgroundColor = Keys.shared.background
+        let viewControllerStack = self.navigationController?.viewControllers
+        if viewControllerStack?.count == 3 {
+            self.navigationController?.viewControllers.remove(at: 1)
+        }
+        BracketCollectionViewLayout.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -111,6 +117,18 @@ class BracketCollectionViewController: UICollectionViewController {
                 
                 return cell
             }
+        }
+    }
+    
+    func getHeight() -> CGFloat {
+        if let height = self.navigationController?.navigationBar.frame.height {
+            if !UIApplication.shared.isStatusBarHidden {
+                return height + UIApplication.shared.statusBarFrame.height
+            }
+            return height
+        } else {
+            print("Error getting navBar height")
+            return 64
         }
     }
     
