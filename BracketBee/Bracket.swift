@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Bracket {
+class Bracket: NSObject, NSCoding {
     let name: String
     let seeded: Bool
     let teams: [String]
@@ -23,20 +23,23 @@ class Bracket {
     
     // MARK: - NSCoding
     
-    required convenience init?(coder decoder: NSCoder) {
-        guard let name = decoder.decodeObject(forKey: "name") as? String,
-        let seeded = decoder.decodeObject(forKey: "seeded") as? Bool,
-        let teams = decoder.decodeObject(forKey: "teams") as? [String],
-            let champion = decoder.decodeObject(forKey: "champion") as? MatchupNode<String> else { return nil }
+    required convenience init?(coder aDecoder: NSCoder) {
+        guard let name = aDecoder.decodeObject(forKey: "name") as? String,
+            let seeded = aDecoder.decodeObject(forKey: "seeded") as? Bool,
+            let teams = aDecoder.decodeObject(forKey: "teams") as? [String],
+            let championString = aDecoder.decodeObject(forKey: "champion") as? String else { return nil }
+        
+        let champion = MatchupNode.node(.empty, "PLACEHOLDER", .empty)
         
         self.init(name: name, seeded: seeded, teams: teams, champion: champion)
     }
-    
-    func encodeWithCoder(coder: NSCoder) {
-        coder.encode(name, forKey: "name")
-        coder.encode(seeded, forKey: "seeded")
-        coder.encode(teams, forKey: "teams")
-        coder.encode(champion, forKey: "champion")
+
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(name, forKey: "name")
+        aCoder.encode(seeded, forKey: "seeded")
+        aCoder.encode(teams, forKey: "teams")
+        let championValue = String(describing: self.champion)
+        aCoder.encode(championValue, forKey: "champion")
     }
 }
 

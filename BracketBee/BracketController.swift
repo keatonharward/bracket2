@@ -13,6 +13,10 @@
         
         static let shared = BracketController()
         
+        init() {
+            loadFromPersistentStore()
+        }
+        
         var brackets: [Bracket] = []
         
         func addBracket(name: String, seeded: Bool, teams: [String]){
@@ -21,9 +25,9 @@
             //            print(champion.description)
             let bracket = Bracket(name: name, seeded: seeded, teams: teams, champion: champion)
             let brokenDown = breakDownRounds(bracket: bracket)
-            print(brokenDown)
+            //            print(brokenDown)
             brackets.append(bracket)
-            // TODO: - save me
+            saveToPersistentStore()
         }
         
         func layoutBracket(teams: [String], seeded: Bool) -> MatchupNode<String>{
@@ -158,7 +162,7 @@
                     } else {
                         roundArray.append(nil)
                         roundArray.append(nil)
-
+                        
                     }
                 }
                 allRoundsDictionary.updateValue(roundArray, forKey: round)
@@ -168,4 +172,50 @@
             return allRoundsDictionary
         }
         
+        func saveToPersistentStore() {
+            for bracket in brackets {
+                let filePath = getDocumentsDirectory().appendingPathComponent("\(bracket.name).bracket")
+                print(filePath)
+                let bracketData = NSKeyedArchiver.archivedData(withRootObject: bracket)
+                do {
+                    try bracketData.write(to: filePath)
+                } catch let error as NSError {
+                    print("Could not save bracket called \(bracket.name). \(error.localizedDescription)")
+                }
+            }
+        }
+        
+        func loadFromPersistentStore() {
+            let filePath = getDocumentsDirectory()
+            var loadedBrackets: [Bracket] = []
+            // TODO: - Fix this so it holds files, not strings.
+            var bracketsToLoad: [String] = []
+            do {
+                bracketsToLoad = try FileManager.default.contentsOfDirectory(atPath: filePath.path)
+                print(bracketsToLoad)
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+            for bracketData in bracketsToLoad {
+                if let bracket = NSKeyedUnarchiver.unarchiveObject(withFile: bracketData) as? Bracket {
+                    loadedBrackets.append(bracket)
+                }
+            }
+            brackets = loadedBrackets
+        }
+        
+        func getDocumentsDirectory() -> URL {
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let bracketsDirectory = paths[0].appendingPathComponent("Brackets", isDirectory: true)
+            
+            // TODO: - I think this is going to be false every time, need to do something to make it actually check whether or not the directory exists.
+            if FileManager.default.fileExists(atPath: bracketsDirectory.absoluteString) == false {
+                do {
+                    try FileManager.default.createDirectory(at: bracketsDirectory, withIntermediateDirectories: true, attributes: nil)
+                } catch let error as NSError {
+                    print("Error creating directory: \(error.localizedDescription)")
+                }
+            }
+            return bracketsDirectory
+        }
     }
