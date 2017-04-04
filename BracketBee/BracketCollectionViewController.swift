@@ -21,7 +21,7 @@ class BracketCollectionViewController: UICollectionViewController, BracketCollec
     }
     
     var rounds = 0
-    var roundsDictionary = [Int: [MatchupNode<String>?]]()
+    var roundsDictionary = [Int: [MatchupNode?]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()

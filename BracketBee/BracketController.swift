@@ -30,7 +30,7 @@
             saveToPersistentStore()
         }
         
-        func layoutBracket(teams: [String], seeded: Bool) -> MatchupNode<String>{
+        func layoutBracket(teams: [String], seeded: Bool) -> MatchupNode{
             
             let teamNodes = seedTeamsToNodes(teams: teams, seeded: seeded)
             
@@ -39,7 +39,7 @@
         }
         
         // Create node objects that hold each team name & add nodes to an ordered array of seeds
-        func seedTeamsToNodes(teams: [String], seeded: Bool) -> [MatchupNode<String>] {
+        func seedTeamsToNodes(teams: [String], seeded: Bool) -> [MatchupNode] {
             
             var teams = teams
             
@@ -47,11 +47,11 @@
                 teams = shuffle(teams: teams)
             }
             
-            var teamNodes:[MatchupNode<String>] = []
+            var teamNodes:[MatchupNode] = []
             
             for team in teams {
                 let nodeTeam = team
-                let node = MatchupNode.node(.empty, nodeTeam, .empty)
+                let node = MatchupNode(winner: team, left: nil, right: nil)
                 teamNodes.append(node)
             }
             
@@ -66,7 +66,7 @@
             return shuffledTeams
         }
         
-        func findMatchups(teams: [MatchupNode<String>]) -> MatchupNode<String> {
+        func findMatchups(teams: [MatchupNode]) -> MatchupNode {
             //        let totalGames = (teams.count - 1)
             let rounds = findRounds(numberOfTeams: teams.count)
             var allNodes = teams
@@ -86,7 +86,7 @@
             var remainingMatchups = ((allNodes.count - numberOfByes) / 2) + numberOfByes
             
             while remainingMatchups > 0 {
-                var round = [MatchupNode<String>]()
+                var round = [MatchupNode]()
                 
                 // This while loop adds the nodes of teams that have a bye in the 1st round to the bracket to an array of nodes that will otherwise hold matchups
                 while numberOfByes > 0 {
@@ -104,7 +104,7 @@
                     if let firstNode = allNodes.first {
                         if let secondNode = allNodes.popLast() {
                             
-                            let matchup = MatchupNode.node(firstNode, "TBD", secondNode)
+                            let matchup = MatchupNode(winner: "TBD", left: firstNode, right: secondNode)
                             allNodes.removeFirst()
                             round.append(matchup)
                         }
@@ -131,32 +131,32 @@
             return numberOfRounds
         }
         
-        func breakDownRounds(bracket: Bracket) -> [Int: [MatchupNode<String>?]] {
+        func breakDownRounds(bracket: Bracket) -> [Int: [MatchupNode?]] {
             var round = findRounds(numberOfTeams: bracket.teams.count)
-            var previousRoundArray = [MatchupNode<String>?]()
+            var previousRoundArray = [MatchupNode?]()
             previousRoundArray.append(bracket.champion)
-            var allRoundsDictionary = [Int: [MatchupNode<String>?]]()
+            var allRoundsDictionary = [Int: [MatchupNode?]]()
             allRoundsDictionary.updateValue([bracket.champion], forKey: round)
             let passes = round
             
             for _ in 1...passes {
                 round -= 1
-                var roundArray = [MatchupNode<String>?]()
+                var roundArray = [MatchupNode?]()
                 for matchup in previousRoundArray {
                     if let matchup = matchup {
                         let leftTeam = matchup.left
                         switch leftTeam {
-                        case .empty:
+                        case nil:
                             roundArray.append(nil)
-                        case .node:
+                        default:
                             roundArray.append(leftTeam)
                         }
                         
                         let rightTeam = matchup.right
                         switch rightTeam {
-                        case .empty:
+                        case nil:
                             roundArray.append(nil)
-                        case .node:
+                        default:
                             roundArray.append(rightTeam)
                         }
                     } else {

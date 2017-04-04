@@ -12,9 +12,9 @@ class Bracket: NSObject, NSCoding {
     let name: String
     let seeded: Bool
     let teams: [String]
-    var champion: MatchupNode<String>
+    var champion: MatchupNode
     
-    init(name: String, seeded: Bool, teams: [String], champion: MatchupNode<String>) {
+    init(name: String, seeded: Bool, teams: [String], champion: MatchupNode) {
         self.name = name
         self.seeded = seeded
         self.teams = teams
@@ -29,7 +29,7 @@ class Bracket: NSObject, NSCoding {
             let teams = aDecoder.decodeObject(forKey: "teams") as? [String],
             let championString = aDecoder.decodeObject(forKey: "champion") as? String else { return nil }
         
-        let champion = MatchupNode.node(.empty, "PLACEHOLDER", .empty)
+        let champion = MatchupNode(winner: "PLACEHOLDER", left: nil, right: nil)
         
         self.init(name: name, seeded: seeded, teams: teams, champion: champion)
     }
