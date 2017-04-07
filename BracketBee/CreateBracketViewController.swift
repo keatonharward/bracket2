@@ -83,7 +83,7 @@ class CreateBracketViewController: UIViewController {
             textField.placeholder = "Participant Name..."
             participantTextField = textField
         }
-        present(addParticipantAlert, animated: true)
+        present(addParticipantAlert, animated: false)
     }
     
     func presentAddUserError() {

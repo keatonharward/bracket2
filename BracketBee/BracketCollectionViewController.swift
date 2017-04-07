@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "participantCell"
 
-class BracketCollectionViewController: UICollectionViewController, BracketCollectionViewLayoutDelegate {
+class BracketCollectionViewController: UICollectionViewController, UIGestureRecognizerDelegate, BracketCollectionViewLayoutDelegate {
     
     var bracket: Bracket? {
         didSet {
@@ -21,21 +21,20 @@ class BracketCollectionViewController: UICollectionViewController, BracketCollec
     }
     
     var rounds = 0
-    var roundsDictionary = [Int: [MatchupNode<String>?]]()
+    var roundsDictionary = [Int: [MatchupNode?]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // MARK: - Test bracket
-        //        let tempTeams = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"]
-        //        var tempBracket = BracketController.shared.layoutBracket(teams: tempTeams, seeded: true)
-        //        tempBracket.changeNode(newValue: "TEST")
-        //        var bracket2 = tempBracket.left
-        //        bracket2.changeNode(newValue: "TEST2")
-        //        tempBracket.left = bracket2
-        ////        print(test.description)
-        //        bracket = Bracket(name: "Test", seeded: true, teams: tempTeams, champion: tempBracket)
-        //        roundsDictionary = BracketController.shared.breakDownRounds(bracket: bracket!)
+        //         MARK: - Test bracket
+//        let tempTeams = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+//        var tempBracket = BracketController.shared.layoutBracket(teams: tempTeams, seeded: true)
+        //                var bracket2 = tempBracket.left
+        //                bracket2?.selectWinner(leftIsWinner: true)
+        //                tempBracket.left = bracket2
+        //                print(tempBracket.description)
+//        bracket = Bracket(name: "Test", seeded: true, teams: tempTeams, champion: tempBracket)
+        //                roundsDictionary = BracketController.shared.breakDownRounds(bracket: bracket!)
         
         self.collectionView?.backgroundColor = Keys.shared.background
         let viewControllerStack = self.navigationController?.viewControllers
@@ -43,6 +42,12 @@ class BracketCollectionViewController: UICollectionViewController, BracketCollec
             self.navigationController?.viewControllers.remove(at: 1)
         }
         BracketCollectionViewLayout.delegate = self
+        
+        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(longPressCell(sender:)))
+        lpgr.minimumPressDuration = 0.5
+        lpgr.delaysTouchesBegan = true
+        lpgr.delegate = self
+        self.collectionView?.addGestureRecognizer(lpgr)
     }
     
     override func didReceiveMemoryWarning() {
@@ -90,11 +95,11 @@ class BracketCollectionViewController: UICollectionViewController, BracketCollec
             }
             return cell
         } else {
-            guard let stringArray = roundsDictionary[indexPath.section] else {
+            guard let matchupNodeArray = roundsDictionary[indexPath.section] else {
                 print("Unable to fetch the team array from the round dictionary for round \(indexPath.section)")
                 return UICollectionViewCell()
             }
-            let cellString = stringArray[indexPath.row - 1]?.winner
+            let cellString = matchupNodeArray[indexPath.row - 1]?.winner
             if cellString == nil {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "noTeamCell", for: indexPath) as? NoTeamCollectionViewCell else {
                     print("Unable to cast collection view cell to custom type.")
@@ -127,7 +132,7 @@ class BracketCollectionViewController: UICollectionViewController, BracketCollec
             }
             return height
         } else {
-            print("Error getting navBar height")
+            //            print("Error getting navBar height")
             return 64
         }
     }
@@ -141,13 +146,139 @@ class BracketCollectionViewController: UICollectionViewController, BracketCollec
      }
      */
     
-    /*
-     // Uncomment this method to specify if the specified item should be selected
-     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
     
+    // Uncomment this method to specify if the specified item should be selected
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        
+        guard let winnerRoundArray = roundsDictionary[indexPath.section + 1] else { return false }
+        guard let winnerMatchup = winnerRoundArray[Int(ceil(Double(indexPath.row) / 2) - 1)] else { return false }
+        guard let winnerRound = roundsDictionary[indexPath.section], let winner = winnerRound[indexPath.row - 1] else { return false }
+        
+            if winnerMatchup.left == nil && winnerMatchup.right == nil {
+                print("You did something wrong, you shouldn't be able to select that cell!")
+            } else if winnerMatchup.left != nil && winnerMatchup.right != nil {
+                if winner.winner == "TBD" {
+                    childTeamMissingNotification()
+                    return false
+                    //            } else if winnerMatchup.winner != "TBD" {
+                    //                var replace = false
+                    //                presentReplaceWinnerAlert(){ shouldReplace in
+                    //                    replace = shouldReplace
+                    //                }
+                    //                if replace == false {
+                    //                    return false
+                    //                }
+                } else if winnerMatchup.left?.winner == "TBD" || winnerMatchup.right?.winner == "TBD" {
+                    opponentMissingNotification()
+                    return false
+                }
+                guard let leftMatchup = winnerMatchup.left, let rightMatchup = winnerMatchup.right else { return false }
+                if nodeCanChange(indexPath: indexPath) {
+                    if leftMatchup == winner {
+                        winnerMatchup.selectWinner(leftIsWinner: true)
+                    } else if rightMatchup == winner {
+                        winnerMatchup.selectWinner(leftIsWinner: false)
+                    } else {
+                        print("You picked a winner that doesn't have teams!")
+                    }
+                } else {
+                    winnerAlreadySelectedNotification()
+                }
+            }
+        
+        if let bracket = bracket {
+            roundsDictionary = BracketController.shared.breakDownRounds(bracket: bracket)
+        }
+        collectionView.reloadData()
+        return false
+    }
+    
+    func longPressCell(sender: UILongPressGestureRecognizer) {
+        if sender.state != .ended { return }
+        let pointInCollectionView = sender.location(in: self.collectionView)
+        guard let indexPath = self.collectionView?.indexPathForItem(at: pointInCollectionView) else { return }
+        
+        if !nodeCanChange(indexPath: indexPath) {
+            winnerAlreadySelectedNotification()
+        } else {
+            guard let changedNodeRound = roundsDictionary[indexPath.section] else { return }
+            guard let nodeToChange = changedNodeRound[indexPath.row - 1] else { return }
+            if nodeToChange.winner == "TBD" {
+                return
+            } else {
+                nodeToChange.winner = "TBD"
+                if let bracket = bracket {
+                    BracketController.shared.breakDownRounds(bracket: bracket)
+                    collectionView?.reloadData()
+                }
+            }
+        }
+    }
+    
+    
+    func nodeCanChange(indexPath: IndexPath) -> Bool {
+        guard let winnerRound = roundsDictionary[indexPath.section + 1] else {
+            if roundsDictionary[indexPath.section] != nil { return true } else { return false }}
+        guard let winnerNode = winnerRound[Int(ceil(Double(indexPath.row) / 2) - 1)] else { return false }
+        
+        if winnerNode.winner != "TBD" {
+            return false
+        }
+        return true
+    }
+    
+    // MARK: - Remove all winners after the selected node - Super broken right now
+    //    func removeWinnersPastSelection(winner: MatchupNode, indexPath: IndexPath) {
+    //        let newIndexPath = IndexPath(item: Int(ceil(Double(indexPath.row) / 2) - 1), section: indexPath.section + 1)
+    //
+    //        print(newIndexPath.section)
+    //        print(newIndexPath.row)
+    //        guard let nextRoundArray = roundsDictionary[newIndexPath.section] else { return }
+    //        guard let nextRoundWinner = nextRoundArray[newIndexPath.item] else { return }
+    //        if nextRoundWinner.winner == "TBD" {
+    //            return
+    //        } else {
+    //            let winnerToRemove = nextRoundWinner
+    //            nextRoundWinner.winner = "TBD"
+    //            removeWinnersPastSelection(winner: winnerToRemove, indexPath: newIndexPath)
+    //        }
+    //    }
+    
+    
+    // TODO: - Fix this completion so it will properly pass the bool value from the user selection before running the rest of the update winner code.
+    //    func presentReplaceWinnerAlert(completion:@escaping (Bool) -> ()){
+    //        let replaceWinnerAlert = UIAlertController(title: "A winner has already been chosen!", message: "Are you sure you want to change the winner?", preferredStyle: .alert)
+    //        let yesAction = UIAlertAction(title: "Yes", style: .default) { (_) in
+    //            completion(true)
+    //        }
+    //        let noAction = UIAlertAction(title: "No", style: .default) { (_) in
+    //            completion(false)
+    //        }
+    //
+    //        replaceWinnerAlert.addAction(yesAction)
+    //        replaceWinnerAlert.addAction(noAction)
+    //        present(replaceWinnerAlert, animated: true)
+    //    }
+    
+    func childTeamMissingNotification() {
+        let needWinnerError = UIAlertController(title: "There's not a team there!", message: "Make sure you have selected the winners of previous rounds before picking a winner!", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        needWinnerError.addAction(okAction)
+        present(needWinnerError, animated: true)
+    }
+    
+    func opponentMissingNotification() {
+        let needTeamsError = UIAlertController(title: "Participant doesn't have an opponent!", message: "Make sure you complete the previous rounds before selecting a winner!", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        needTeamsError.addAction(okAction)
+        present(needTeamsError, animated: true)
+    }
+    
+    func winnerAlreadySelectedNotification() {
+        let deSelectWinnerError = UIAlertController(title: "Winner already selected!", message: "Please de-select the winners after the selected cell and try again.", preferredStyle: .alert)
+        deSelectWinnerError.addAction(UIAlertAction(title: "OK", style: .default))
+        present(deSelectWinnerError, animated: true)
+    }
     /*
      // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
      override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
