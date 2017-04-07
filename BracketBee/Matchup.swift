@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MatchupNode {
+class MatchupNode: Equatable {
     var winner: String
     var left: MatchupNode?
     var right: MatchupNode?
@@ -19,29 +19,44 @@ class MatchupNode {
         self.left = left
         self.right = right
     }
+    
+    func selectWinner(leftIsWinner: Bool) {
+        if leftIsWinner == true {
+            guard let left = self.left else { return }
+            self.winner = left.winner
+        } else {
+            guard let right = self.right else { return }
+            self.winner = right.winner
+        }
+        
+    }
 }
 
-//extension MatchupNode {
-//    public var description: String {
-//        switch self {
-//        case let .node(left, value, right):
-//            let returnString = "value: \(value), left = [\(left.description)], right = [\(right.description)]"
-//            return returnString
-//        case .empty:
-//            return ""
-//        }
-//    }
-//}
-
-//public protocol BinaryTree: Equatable {
-//    var winner: T { get set }
-//    var left: Self? { get set }
-//    var right: Self? { get set }
-//}
+extension MatchupNode {
+    public var description: String {
+        switch self.winner {
+        case nil:
+            return ""
+        default:
+            if let left = left, let right = right {
+            let returnString = "value: \(winner), left = [\(left.description)], right = [\(right.description)]"
+            return returnString
+            } else if let left = left, right == nil {
+                let returnString = "value: \(winner), left = [\(left.description)], right = []"
+                return returnString
+            } else if let right = right, left == nil {
+                let returnString = "value: \(winner), left = [], right = [\(right.description)]"
+                return returnString
+            } else {
+                let returnString = "value: \(winner), left = [], right = []"
+                return returnString
+            }
+        }
+    }
+}
 
 extension MatchupNode {
-    public static func ==(lhs: MatchupNode, rhs: MatchupNode) -> Bool {
-        guard let left = lhs.left, let right = rhs.right else { return false }
-        return (lhs.winner == rhs.winner) && left == left && right == right
+    public static func ==(lhs: MatchupNode, rhs: MatchupNode) -> Bool {       
+        return (lhs.winner == rhs.winner) && lhs.left == rhs.left && lhs.right == rhs.right
     }
 }
