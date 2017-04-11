@@ -27,13 +27,13 @@ class BracketCollectionViewController: UICollectionViewController, UIGestureReco
         super.viewDidLoad()
         
         //         MARK: - Test bracket
-        let tempTeams = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-        var tempBracket = BracketController.shared.layoutBracket(teams: tempTeams, seeded: true)
+//        let tempTeams = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+//        var tempBracket = BracketController.shared.layoutBracket(teams: tempTeams, seeded: true)
         //                var bracket2 = tempBracket.left
         //                bracket2?.selectWinner(leftIsWinner: true)
         //                tempBracket.left = bracket2
         //                print(tempBracket.description)
-        bracket = Bracket(name: "Test", seeded: true, teams: tempTeams, champion: tempBracket)
+//        bracket = Bracket(name: "Test", seeded: true, teams: tempTeams, champion: tempBracket)
         //                roundsDictionary = BracketController.shared.breakDownRounds(bracket: bracket!)
         
         self.collectionView?.backgroundColor = Keys.shared.background
