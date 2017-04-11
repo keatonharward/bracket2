@@ -27,13 +27,13 @@ class BracketCollectionViewController: UICollectionViewController, UIGestureReco
         super.viewDidLoad()
         
         //         MARK: - Test bracket
-//        let tempTeams = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-//        var tempBracket = BracketController.shared.layoutBracket(teams: tempTeams, seeded: true)
+        let tempTeams = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+        var tempBracket = BracketController.shared.layoutBracket(teams: tempTeams, seeded: true)
         //                var bracket2 = tempBracket.left
         //                bracket2?.selectWinner(leftIsWinner: true)
         //                tempBracket.left = bracket2
         //                print(tempBracket.description)
-//        bracket = Bracket(name: "Test", seeded: true, teams: tempTeams, champion: tempBracket)
+        bracket = Bracket(name: "Test", seeded: true, teams: tempTeams, champion: tempBracket)
         //                roundsDictionary = BracketController.shared.breakDownRounds(bracket: bracket!)
         
         self.collectionView?.backgroundColor = Keys.shared.background
@@ -149,7 +149,7 @@ class BracketCollectionViewController: UICollectionViewController, UIGestureReco
     
     // Uncomment this method to specify if the specified item should be selected
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        
+        if indexPath.item == 0 { return false }
         guard let winnerRoundArray = roundsDictionary[indexPath.section + 1] else { return false }
         guard let winnerMatchup = winnerRoundArray[Int(ceil(Double(indexPath.row) / 2) - 1)] else { return false }
         guard let winnerRound = roundsDictionary[indexPath.section], let winner = winnerRound[indexPath.row - 1] else { return false }
@@ -158,18 +158,10 @@ class BracketCollectionViewController: UICollectionViewController, UIGestureReco
                 print("You did something wrong, you shouldn't be able to select that cell!")
             } else if winnerMatchup.left != nil && winnerMatchup.right != nil {
                 if winner.winner == "TBD" {
-                    childTeamMissingNotification()
+                    childTeamMissingNotification(indexPath: indexPath)
                     return false
-                    //            } else if winnerMatchup.winner != "TBD" {
-                    //                var replace = false
-                    //                presentReplaceWinnerAlert(){ shouldReplace in
-                    //                    replace = shouldReplace
-                    //                }
-                    //                if replace == false {
-                    //                    return false
-                    //                }
                 } else if winnerMatchup.left?.winner == "TBD" || winnerMatchup.right?.winner == "TBD" {
-                    opponentMissingNotification()
+                    opponentMissingNotification(indexPath: indexPath)
                     return false
                 }
                 guard let leftMatchup = winnerMatchup.left, let rightMatchup = winnerMatchup.right else { return false }
@@ -182,7 +174,8 @@ class BracketCollectionViewController: UICollectionViewController, UIGestureReco
                         print("You picked a winner that doesn't have teams!")
                     }
                 } else {
-                    winnerAlreadySelectedNotification()
+                    winnerAlreadySelectedNotification(indexPath: indexPath)
+                    return false
                 }
             }
         
@@ -197,16 +190,20 @@ class BracketCollectionViewController: UICollectionViewController, UIGestureReco
         if sender.state != .ended { return }
         let pointInCollectionView = sender.location(in: self.collectionView)
         guard let indexPath = self.collectionView?.indexPathForItem(at: pointInCollectionView) else { return }
+        if indexPath.item == 0 { return }
         
+        guard let roundArray = roundsDictionary[indexPath.section], let selectedMatchupNode = roundArray[indexPath.row - 1] else { return }
+        
+        if selectedMatchupNode.left?.winner == nil || selectedMatchupNode.right?.winner == nil {
+            return
+        }
         if !nodeCanChange(indexPath: indexPath) {
-            winnerAlreadySelectedNotification()
+            winnerAlreadySelectedNotification(indexPath: indexPath)
         } else {
-            guard let changedNodeRound = roundsDictionary[indexPath.section] else { return }
-            guard let nodeToChange = changedNodeRound[indexPath.row - 1] else { return }
-            if nodeToChange.winner == "TBD" {
+            if selectedMatchupNode.winner == "TBD" {
                 return
             } else {
-                nodeToChange.winner = "TBD"
+                selectedMatchupNode.winner = "TBD"
                 if let bracket = bracket {
                     BracketController.shared.breakDownRounds(bracket: bracket)
                     collectionView?.reloadData()
@@ -260,24 +257,87 @@ class BracketCollectionViewController: UICollectionViewController, UIGestureReco
     //        present(replaceWinnerAlert, animated: true)
     //    }
     
-    func childTeamMissingNotification() {
-        let needWinnerError = UIAlertController(title: "There's not a team there!", message: "Make sure you have selected the winners of previous rounds before picking a winner!", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default)
-        needWinnerError.addAction(okAction)
-        present(needWinnerError, animated: true)
+    // MARK: - can't select cell error functions
+    
+    func childTeamMissingNotification(indexPath: IndexPath) {
+        let leftTeamIndex = IndexPath(item: (indexPath.item * 2) - 2, section: indexPath.section - 1)
+        let rightTeamIndex = IndexPath(item: (indexPath.item * 2) - 1, section: indexPath.section - 1)
+        
+        guard let previousRound = roundsDictionary[leftTeamIndex.section], let leftTeam = previousRound[leftTeamIndex.item] else { return }
+        guard let rightTeam = previousRound[rightTeamIndex.item] else { return }
+        
+        guard let collectionView = collectionView else { return }
+
+        if leftTeam.winner == "TBD" && rightTeam.winner == "TBD" {
+            guard let leftCell = collectionView.cellForItem(at: rightTeamIndex) as? TBDCollectionViewCell, let rightCell = collectionView.cellForItem(at: IndexPath(item: rightTeamIndex.item + 1, section: rightTeamIndex.section)) as? TBDCollectionViewCell else { return }
+            cellPulseAnimation(cell: leftCell)
+            cellPulseAnimation(cell: rightCell)
+        } else if leftTeam.winner == "TBD" {
+            guard let leftCell = collectionView.cellForItem(at: rightTeamIndex) as? TBDCollectionViewCell else { return }
+            cellPulseAnimation(cell: leftCell)
+        } else if rightTeam.winner == "TBD" {
+            guard let rightCell = collectionView.cellForItem(at: IndexPath(item: rightTeamIndex.item + 1, section: rightTeamIndex.section)) as? TBDCollectionViewCell else { return }
+            cellPulseAnimation(cell: rightCell)
+        } else {
+            guard let leftCell = collectionView.cellForItem(at: rightTeamIndex) as? ParticipantCollectionViewCell, let rightCell = collectionView.cellForItem(at: IndexPath(item: rightTeamIndex.item + 1, section: rightTeamIndex.section)) as? ParticipantCollectionViewCell else { return }
+            cellPulseAnimation(cell: leftCell)
+            cellPulseAnimation(cell: rightCell)
+        }
     }
     
-    func opponentMissingNotification() {
-        let needTeamsError = UIAlertController(title: "Participant doesn't have an opponent!", message: "Make sure you complete the previous rounds before selecting a winner!", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default)
-        needTeamsError.addAction(okAction)
-        present(needTeamsError, animated: true)
+    func opponentMissingNotification(indexPath: IndexPath) {
+        var missingTeamIsLeft: Bool
+        if indexPath.row % 2 == 0 {
+            missingTeamIsLeft = true
+        } else {
+            missingTeamIsLeft = false
+        }
+        
+        if missingTeamIsLeft {
+            let rightTeamCell = IndexPath(item: indexPath.item - 1, section: indexPath.section)
+            guard let cellToAnimate = collectionView?.cellForItem(at: rightTeamCell) as? TBDCollectionViewCell else { return }
+            cellPulseAnimation(cell: cellToAnimate)
+        } else {
+            let leftTeamCell = IndexPath(item: indexPath.item + 1, section: indexPath.section)
+            guard let cellToAnimate = collectionView?.cellForItem(at: leftTeamCell) as? TBDCollectionViewCell else { return }
+            cellPulseAnimation(cell: cellToAnimate)
+        }
     }
     
-    func winnerAlreadySelectedNotification() {
-        let deSelectWinnerError = UIAlertController(title: "Winner already selected!", message: "Please de-select the winners after the selected cell and try again.", preferredStyle: .alert)
-        deSelectWinnerError.addAction(UIAlertAction(title: "OK", style: .default))
-        present(deSelectWinnerError, animated: true)
+    func winnerAlreadySelectedNotification(indexPath: IndexPath) {
+        let winnerCellIndex = IndexPath(item: Int(ceil(Double(indexPath.item) / 2)), section: indexPath.section + 1)
+        guard let cellToAnimate = collectionView?.cellForItem(at: winnerCellIndex) as? ParticipantCollectionViewCell else { return }
+        cellPulseAnimation(cell: cellToAnimate)
+    }
+    
+    // MARK: - Cell animation functions
+    
+    func cellPulseAnimation(cell: UICollectionViewCell) {
+        
+        let changeBorderColor = CAKeyframeAnimation()
+        changeBorderColor.keyPath = "borderColor"
+        changeBorderColor.values = [Keys.shared.accent.cgColor,
+                                    UIColor.red.cgColor,
+                                    UIColor.yellow.cgColor,
+                                    UIColor.red.cgColor,
+                                    Keys.shared.accent.cgColor
+        ]
+        changeBorderColor.keyTimes = [0, 0.25, 0.5, 0.75, 1]
+        
+        let changeSize = CAKeyframeAnimation()
+        changeSize.keyPath = "transform.scale"
+        
+        changeSize.values = [1, 1.15, 1, 1.15, 1]
+        changeSize.keyTimes = [0, 0.25, 0.5, 0.75, 1]
+        
+        
+        let group = CAAnimationGroup()
+        group.animations = [changeBorderColor, changeSize]
+        group.duration = 1.0
+        group.repeatCount = 1.0
+        DispatchQueue.main.async {
+            cell.layer.add(group, forKey: nil)
+        }
     }
     /*
      // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
