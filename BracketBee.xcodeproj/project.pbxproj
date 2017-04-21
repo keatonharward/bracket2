@@ -15,7 +15,6 @@
 		532CC2C61E79FDA3002CD4E1 /* TBDCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532CC2C51E79FDA3002CD4E1 /* TBDCollectionViewCell.swift */; };
 		533088F91E4E7CA6002B3AD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533088F81E4E7CA6002B3AD3 /* AppDelegate.swift */; };
 		533088FE1E4E7CA6002B3AD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 533088FC1E4E7CA6002B3AD3 /* Main.storyboard */; };
-		533089011E4E7CA6002B3AD3 /* BracketBee.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 533088FF1E4E7CA6002B3AD3 /* BracketBee.xcdatamodeld */; };
 		533089031E4E7CA6002B3AD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 533089021E4E7CA6002B3AD3 /* Assets.xcassets */; };
 		533089061E4E7CA6002B3AD3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 533089041E4E7CA6002B3AD3 /* LaunchScreen.storyboard */; };
 		533089111E4E7CA6002B3AD3 /* BracketBeeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533089101E4E7CA6002B3AD3 /* BracketBeeTests.swift */; };
@@ -56,7 +55,6 @@
 		533088F51E4E7CA6002B3AD3 /* BracketBee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BracketBee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		533088F81E4E7CA6002B3AD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		533088FD1E4E7CA6002B3AD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		533089001E4E7CA6002B3AD3 /* BracketBee.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BracketBee.xcdatamodel; sourceTree = "<group>"; };
 		533089021E4E7CA6002B3AD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		533089051E4E7CA6002B3AD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		533089071E4E7CA6002B3AD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -132,7 +130,6 @@
 				53BDDD7E1E6DD19500ADDE3F /* Keys.swift */,
 				533089041E4E7CA6002B3AD3 /* LaunchScreen.storyboard */,
 				533089071E4E7CA6002B3AD3 /* Info.plist */,
-				533088FF1E4E7CA6002B3AD3 /* BracketBee.xcdatamodeld */,
 			);
 			path = BracketBee;
 			sourceTree = "<group>";
@@ -335,7 +332,6 @@
 			files = (
 				5330892A1E4FAB9B002B3AD3 /* Bracket.swift in Sources */,
 				533088F91E4E7CA6002B3AD3 /* AppDelegate.swift in Sources */,
-				533089011E4E7CA6002B3AD3 /* BracketBee.xcdatamodeld in Sources */,
 				53BDDD7F1E6DD19500ADDE3F /* Keys.swift in Sources */,
 				531FCC0F1E732476000AA223 /* BracketCollectionViewLayout.swift in Sources */,
 				538FA0281E6DE249000B778B /* CreateBracketViewController.swift in Sources */,
@@ -619,19 +615,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		533088FF1E4E7CA6002B3AD3 /* BracketBee.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				533089001E4E7CA6002B3AD3 /* BracketBee.xcdatamodel */,
-			);
-			currentVersion = 533089001E4E7CA6002B3AD3 /* BracketBee.xcdatamodel */;
-			path = BracketBee.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 533088ED1E4E7CA6002B3AD3 /* Project object */;
 }

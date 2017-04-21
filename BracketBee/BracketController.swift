@@ -189,16 +189,30 @@
             let filePath = getDocumentsDirectory()
             var loadedBrackets: [Bracket] = []
             // TODO: - Fix this so it holds files, not strings.
-            var bracketsToLoad: [String] = []
+            var bracketURLs: [URL] = []
             do {
-                bracketsToLoad = try FileManager.default.contentsOfDirectory(atPath: filePath.path)
-                print(bracketsToLoad)
+                let fileNames = try FileManager.default.contentsOfDirectory(atPath: filePath.path)
+                print(fileNames)
+                for bracket in fileNames {
+                    if bracket.hasSuffix(".bracket") {
+                        var filePathCopy = filePath
+                        filePathCopy.appendPathComponent(bracket)
+                        print(filePathCopy)
+                        bracketURLs.append(filePathCopy)
+                    }
+                }
             } catch let error as NSError {
                 print(error.localizedDescription)
             }
-            for bracketData in bracketsToLoad {
-                if let bracket = NSKeyedUnarchiver.unarchiveObject(withFile: bracketData) as? Bracket {
-                    loadedBrackets.append(bracket)
+            for bracketPath in bracketURLs {
+                do {
+                let bracketData = try Data.init(contentsOf: bracketPath)
+                guard let bracket = NSKeyedUnarchiver.unarchiveObject(with: bracketData) as? Bracket else {
+                    print("There's still an error unarchiving a bracket")
+                    return }
+                loadedBrackets.append(bracket)
+                } catch let error as NSError {
+                    print(error.localizedDescription)
                 }
             }
             brackets = loadedBrackets

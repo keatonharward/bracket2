@@ -150,7 +150,9 @@ class BracketCollectionViewController: UICollectionViewController, UIGestureReco
     // Uncomment this method to specify if the specified item should be selected
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         if indexPath.item == 0 { return false }
-        guard let winnerRoundArray = roundsDictionary[indexPath.section + 1] else { return false }
+        guard let winnerRoundArray = roundsDictionary[indexPath.section + 1] else {
+            childTeamMissingNotification(indexPath: indexPath)
+            return false }
         guard let winnerMatchup = winnerRoundArray[Int(ceil(Double(indexPath.row) / 2) - 1)] else { return false }
         guard let winnerRound = roundsDictionary[indexPath.section], let winner = winnerRound[indexPath.row - 1] else { return false }
         
@@ -179,15 +181,14 @@ class BracketCollectionViewController: UICollectionViewController, UIGestureReco
                 }
             }
         
-        if let bracket = bracket {
-            roundsDictionary = BracketController.shared.breakDownRounds(bracket: bracket)
+        if bracket != nil {
+            BracketController.shared.saveToPersistentStore()
         }
         collectionView.reloadData()
         return false
     }
     
     func longPressCell(sender: UILongPressGestureRecognizer) {
-        if sender.state != .ended { return }
         let pointInCollectionView = sender.location(in: self.collectionView)
         guard let indexPath = self.collectionView?.indexPathForItem(at: pointInCollectionView) else { return }
         if indexPath.item == 0 { return }
@@ -204,8 +205,8 @@ class BracketCollectionViewController: UICollectionViewController, UIGestureReco
                 return
             } else {
                 selectedMatchupNode.winner = "TBD"
-                if let bracket = bracket {
-                    BracketController.shared.breakDownRounds(bracket: bracket)
+                if bracket != nil {
+                    BracketController.shared.saveToPersistentStore()
                     collectionView?.reloadData()
                 }
             }
@@ -333,7 +334,7 @@ class BracketCollectionViewController: UICollectionViewController, UIGestureReco
         
         let group = CAAnimationGroup()
         group.animations = [changeBorderColor, changeSize]
-        group.duration = 1.0
+        group.duration = 0.5
         group.repeatCount = 1.0
         DispatchQueue.main.async {
             cell.layer.add(group, forKey: nil)

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MatchupNode: Equatable {
+class MatchupNode: NSObject, NSCoding {
     var winner: String
     var left: MatchupNode?
     var right: MatchupNode?
@@ -20,6 +20,22 @@ class MatchupNode: Equatable {
         self.right = right
     }
     
+    required convenience init?(coder aDecoder: NSCoder) {
+        guard let winner = aDecoder.decodeObject(forKey: "winner") as? String,
+            let left = aDecoder.decodeObject(forKey: "left") as? MatchupNode?,
+            let right = aDecoder.decodeObject(forKey: "right") as? MatchupNode? else {
+                print("There's an error in the matchupNode initializer")
+                return nil }
+        
+        self.init(winner: winner, left: left, right: right)
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(winner, forKey: "winner")
+        aCoder.encode(left, forKey: "left")
+        aCoder.encode(right, forKey: "right")
+    }
+    
     func selectWinner(leftIsWinner: Bool) {
         if leftIsWinner == true {
             guard let left = self.left else { return }
@@ -28,24 +44,23 @@ class MatchupNode: Equatable {
             guard let right = self.right else { return }
             self.winner = right.winner
         }
-        
     }
 }
 
 extension MatchupNode {
-    public var description: String {
+    public var stringDescription: String {
         switch self.winner {
         case nil:
             return ""
         default:
             if let left = left, let right = right {
-            let returnString = "value: \(winner), left = [\(left.description)], right = [\(right.description)]"
+            let returnString = "value: \(winner), left = [\(left.stringDescription)], right = [\(right.stringDescription)]"
             return returnString
             } else if let left = left, right == nil {
-                let returnString = "value: \(winner), left = [\(left.description)], right = []"
+                let returnString = "value: \(winner), left = [\(left.stringDescription)], right = []"
                 return returnString
             } else if let right = right, left == nil {
-                let returnString = "value: \(winner), left = [], right = [\(right.description)]"
+                let returnString = "value: \(winner), left = [], right = [\(right.stringDescription)]"
                 return returnString
             } else {
                 let returnString = "value: \(winner), left = [], right = []"

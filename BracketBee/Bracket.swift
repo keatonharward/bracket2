@@ -24,12 +24,12 @@ class Bracket: NSObject, NSCoding {
     // MARK: - NSCoding
     
     required convenience init?(coder aDecoder: NSCoder) {
+        let seeded = Bool(aDecoder.decodeBool(forKey: "seeded"))
         guard let name = aDecoder.decodeObject(forKey: "name") as? String,
-            let seeded = aDecoder.decodeObject(forKey: "seeded") as? Bool,
             let teams = aDecoder.decodeObject(forKey: "teams") as? [String],
-            let championString = aDecoder.decodeObject(forKey: "champion") as? String else { return nil }
-        
-        let champion = MatchupNode(winner: "PLACEHOLDER", left: nil, right: nil)
+            let champion = aDecoder.decodeObject(forKey: "champion") as? MatchupNode else {
+                print("Error decoding bracket nodes")
+                return nil }
         
         self.init(name: name, seeded: seeded, teams: teams, champion: champion)
     }
@@ -38,8 +38,7 @@ class Bracket: NSObject, NSCoding {
         aCoder.encode(name, forKey: "name")
         aCoder.encode(seeded, forKey: "seeded")
         aCoder.encode(teams, forKey: "teams")
-        let championValue = String(describing: self.champion)
-        aCoder.encode(championValue, forKey: "champion")
+        aCoder.encode(champion, forKey: "champion")
     }
 }
 
