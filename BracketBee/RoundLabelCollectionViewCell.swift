@@ -24,6 +24,8 @@ class RoundLabelCollectionViewCell: UICollectionViewCell {
     }
     
     func setup() {
-        self.layer.backgroundColor = Keys.shared.accent.cgColor
+        self.layer.backgroundColor = Keys.shared.alternateBackground.cgColor
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = Keys.shared.fontColor.cgColor
     }
 }

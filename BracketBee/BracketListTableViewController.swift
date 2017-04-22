@@ -17,6 +17,8 @@ class BracketListTableViewController: UITableViewController {
         tableView.backgroundColor = Keys.shared.background
         self.navigationController?.navigationBar.tintColor = Keys.shared.fontColor
         self.navigationController?.navigationBar.barTintColor = Keys.shared.accent
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

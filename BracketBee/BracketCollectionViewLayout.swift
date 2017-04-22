@@ -35,16 +35,12 @@ class BracketCollectionViewLayout: UICollectionViewLayout {
             return }
         let contentWidth = (Double(collectionView.numberOfSections) * cellWidth) + (Double(collectionView.numberOfSections - 1) * horizontalPadding)
         var contentHeight = 0.0
-        var round1IsPlayIn = false
         
         // checks if round 1 or 2 is the largest section and sets view height accordingly
         for section in 0...collectionView.numberOfSections - 1 {
             let tempHeight = (Double(collectionView.numberOfItems(inSection: section)) * cellHeight) + (Double(collectionView.numberOfItems(inSection: section)) * largestSectionPadding)
             if tempHeight > contentHeight {
                 contentHeight = tempHeight
-                if section != 0 {
-                    round1IsPlayIn = true
-                }
             }
         }
         
@@ -54,7 +50,6 @@ class BracketCollectionViewLayout: UICollectionViewLayout {
         self.contentSize = CGSize(width: contentWidth, height: contentHeight)
         
         if !dataSourceDidUpdate {
-            // TODO: - fix this so it will add the actual height of the nav bar to the offset when rotating.
             guard let padding = BracketCollectionViewLayout.delegate?.getHeight() else { return }
             let yOffset = collectionView.contentOffset.y + padding
             
@@ -137,8 +132,6 @@ class BracketCollectionViewLayout: UICollectionViewLayout {
     
     
     // MARK: - Helper functions
-    
-    
     
     
     // MARK: - for decoration view that will draw the bracket lines.

@@ -118,9 +118,8 @@ class CreateBracketViewController: UIViewController {
         seedingSegmentedControl.tintColor = Keys.shared.accent
         seedingSegmentedControl.backgroundColor = Keys.shared.alternateBackground
         
-        // TODO: - round the corners of everything in this view.
         // set up tableView
-        
+        // TODO: - round the corners of this tableView with a mask on the views frame
 //        participantTableView.superview?.layer.cornerRadius = 5.0
         participantTableView.separatorColor = Keys.shared.accent
         participantTableView.backgroundColor = Keys.shared.alternateBackground

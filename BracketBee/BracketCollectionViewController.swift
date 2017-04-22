@@ -27,14 +27,17 @@ class BracketCollectionViewController: UICollectionViewController, UIGestureReco
         super.viewDidLoad()
         
         //         MARK: - Test bracket
-//        let tempTeams = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-//        var tempBracket = BracketController.shared.layoutBracket(teams: tempTeams, seeded: true)
-        //                var bracket2 = tempBracket.left
-        //                bracket2?.selectWinner(leftIsWinner: true)
-        //                tempBracket.left = bracket2
-        //                print(tempBracket.description)
-//        bracket = Bracket(name: "Test", seeded: true, teams: tempTeams, champion: tempBracket)
-        //                roundsDictionary = BracketController.shared.breakDownRounds(bracket: bracket!)
+//        var tempTeams: [String] = []
+//        var counter = 1
+//        while counter < 8193 {
+//            tempTeams.append("\(counter)")
+//            counter += 1
+//        }
+//        let tempBracket = BracketController.shared.layoutBracket(teams: tempTeams, seeded: true)
+//        //                print(tempBracket.description)
+//        let bracketTest = Bracket(name: "Huge bracket test", seeded: true, teams: tempTeams, champion: tempBracket)
+//        BracketController.shared.brackets.append(bracketTest)
+//        BracketController.shared.saveToPersistentStore()
         
         self.collectionView?.backgroundColor = Keys.shared.background
         let viewControllerStack = self.navigationController?.viewControllers
@@ -78,7 +81,6 @@ class BracketCollectionViewController: UICollectionViewController, UIGestureReco
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         if indexPath.item == 0 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "roundCell", for: indexPath) as? RoundLabelCollectionViewCell else {
                 print("Unable to cast collection view cell for round label")
@@ -224,39 +226,6 @@ class BracketCollectionViewController: UICollectionViewController, UIGestureReco
         }
         return true
     }
-    
-    // MARK: - Remove all winners after the selected node - Super broken right now
-    //    func removeWinnersPastSelection(winner: MatchupNode, indexPath: IndexPath) {
-    //        let newIndexPath = IndexPath(item: Int(ceil(Double(indexPath.row) / 2) - 1), section: indexPath.section + 1)
-    //
-    //        print(newIndexPath.section)
-    //        print(newIndexPath.row)
-    //        guard let nextRoundArray = roundsDictionary[newIndexPath.section] else { return }
-    //        guard let nextRoundWinner = nextRoundArray[newIndexPath.item] else { return }
-    //        if nextRoundWinner.winner == "TBD" {
-    //            return
-    //        } else {
-    //            let winnerToRemove = nextRoundWinner
-    //            nextRoundWinner.winner = "TBD"
-    //            removeWinnersPastSelection(winner: winnerToRemove, indexPath: newIndexPath)
-    //        }
-    //    }
-    
-    
-    // TODO: - Fix this completion so it will properly pass the bool value from the user selection before running the rest of the update winner code.
-    //    func presentReplaceWinnerAlert(completion:@escaping (Bool) -> ()){
-    //        let replaceWinnerAlert = UIAlertController(title: "A winner has already been chosen!", message: "Are you sure you want to change the winner?", preferredStyle: .alert)
-    //        let yesAction = UIAlertAction(title: "Yes", style: .default) { (_) in
-    //            completion(true)
-    //        }
-    //        let noAction = UIAlertAction(title: "No", style: .default) { (_) in
-    //            completion(false)
-    //        }
-    //
-    //        replaceWinnerAlert.addAction(yesAction)
-    //        replaceWinnerAlert.addAction(noAction)
-    //        present(replaceWinnerAlert, animated: true)
-    //    }
     
     // MARK: - can't select cell error functions
     
