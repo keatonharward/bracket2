@@ -11,6 +11,8 @@ import UIKit
 class CreateBracketViewController: UIViewController {
     
     var participants: [String] = []
+    var bracketName: String? = nil
+    var seeded = true
     
     
     // MARK: - Outlets
@@ -29,7 +31,6 @@ class CreateBracketViewController: UIViewController {
            !participants.isEmpty else {
                 presentAddUserError()
                 return }
-        var seeded: Bool
         if seedingSegmentedControl.selectedSegmentIndex == 0 {
             seeded = true
         } else {
@@ -113,10 +114,16 @@ class CreateBracketViewController: UIViewController {
         textFieldIconView.contentMode = UIViewContentMode.bottomRight
         textFieldIconView.image = #imageLiteral(resourceName: "nametag")
         bracketNameTextField.rightView = textFieldIconView
+        if bracketName != nil {
+            bracketNameTextField.text = bracketName
+        }
         
         // set up segmented control for seeding
         seedingSegmentedControl.tintColor = Keys.shared.accent
         seedingSegmentedControl.backgroundColor = Keys.shared.alternateBackground
+        if !seeded {
+            seedingSegmentedControl.selectedSegmentIndex = 1
+        }
         
         // set up tableView
         // TODO: - round the corners of this tableView with a mask on the views frame

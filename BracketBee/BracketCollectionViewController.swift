@@ -26,19 +26,6 @@ class BracketCollectionViewController: UICollectionViewController, UIGestureReco
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //         MARK: - Test bracket
-//        var tempTeams: [String] = []
-//        var counter = 1
-//        while counter < 8193 {
-//            tempTeams.append("\(counter)")
-//            counter += 1
-//        }
-//        let tempBracket = BracketController.shared.layoutBracket(teams: tempTeams, seeded: true)
-//        //                print(tempBracket.description)
-//        let bracketTest = Bracket(name: "Huge bracket test", seeded: true, teams: tempTeams, champion: tempBracket)
-//        BracketController.shared.brackets.append(bracketTest)
-//        BracketController.shared.saveToPersistentStore()
-        
         self.collectionView?.backgroundColor = Keys.shared.background
         let viewControllerStack = self.navigationController?.viewControllers
         if viewControllerStack?.count == 3 {
@@ -158,30 +145,30 @@ class BracketCollectionViewController: UICollectionViewController, UIGestureReco
         guard let winnerMatchup = winnerRoundArray[Int(ceil(Double(indexPath.row) / 2) - 1)] else { return false }
         guard let winnerRound = roundsDictionary[indexPath.section], let winner = winnerRound[indexPath.row - 1] else { return false }
         
-            if winnerMatchup.left == nil && winnerMatchup.right == nil {
-                print("You did something wrong, you shouldn't be able to select that cell!")
-            } else if winnerMatchup.left != nil && winnerMatchup.right != nil {
-                if winner.winner == "TBD" {
-                    childTeamMissingNotification(indexPath: indexPath)
-                    return false
-                } else if winnerMatchup.left?.winner == "TBD" || winnerMatchup.right?.winner == "TBD" {
-                    opponentMissingNotification(indexPath: indexPath)
-                    return false
-                }
-                guard let leftMatchup = winnerMatchup.left, let rightMatchup = winnerMatchup.right else { return false }
-                if nodeCanChange(indexPath: indexPath) {
-                    if leftMatchup == winner {
-                        winnerMatchup.selectWinner(leftIsWinner: true)
-                    } else if rightMatchup == winner {
-                        winnerMatchup.selectWinner(leftIsWinner: false)
-                    } else {
-                        print("You picked a winner that doesn't have teams!")
-                    }
-                } else {
-                    winnerAlreadySelectedNotification(indexPath: indexPath)
-                    return false
-                }
+        if winnerMatchup.left == nil && winnerMatchup.right == nil {
+            print("You did something wrong, you shouldn't be able to select that cell!")
+        } else if winnerMatchup.left != nil && winnerMatchup.right != nil {
+            if winner.winner == "TBD" {
+                childTeamMissingNotification(indexPath: indexPath)
+                return false
+            } else if winnerMatchup.left?.winner == "TBD" || winnerMatchup.right?.winner == "TBD" {
+                opponentMissingNotification(indexPath: indexPath)
+                return false
             }
+            guard let leftMatchup = winnerMatchup.left, let rightMatchup = winnerMatchup.right else { return false }
+            if nodeCanChange(indexPath: indexPath) {
+                if leftMatchup == winner {
+                    winnerMatchup.selectWinner(leftIsWinner: true)
+                } else if rightMatchup == winner {
+                    winnerMatchup.selectWinner(leftIsWinner: false)
+                } else {
+                    print("You picked a winner that doesn't have teams!")
+                }
+            } else {
+                winnerAlreadySelectedNotification(indexPath: indexPath)
+                return false
+            }
+        }
         
         if bracket != nil {
             BracketController.shared.saveToPersistentStore()
@@ -237,7 +224,7 @@ class BracketCollectionViewController: UICollectionViewController, UIGestureReco
         guard let rightTeam = previousRound[rightTeamIndex.item] else { return }
         
         guard let collectionView = collectionView else { return }
-
+        
         if leftTeam.winner == "TBD" && rightTeam.winner == "TBD" {
             guard let leftCell = collectionView.cellForItem(at: rightTeamIndex) as? TBDCollectionViewCell, let rightCell = collectionView.cellForItem(at: IndexPath(item: rightTeamIndex.item + 1, section: rightTeamIndex.section)) as? TBDCollectionViewCell else { return }
             cellPulseAnimation(cell: leftCell)

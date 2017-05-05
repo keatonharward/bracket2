@@ -50,7 +50,6 @@
             var teamNodes:[MatchupNode] = []
             
             for team in teams {
-                let nodeTeam = team
                 let node = MatchupNode(winner: team, left: nil, right: nil)
                 teamNodes.append(node)
             }
@@ -216,6 +215,21 @@
                 }
             }
             brackets = loadedBrackets
+        }
+        
+        func deleteFromPersistentStore(bracketPosition: Int) {
+            let bracketToDelete = brackets[bracketPosition]
+            var filePath = getDocumentsDirectory()
+            filePath.appendPathComponent("\(bracketToDelete.name).bracket")
+            print(filePath)
+            if FileManager.default.fileExists(atPath: filePath.path) {
+                do {
+                    try FileManager.default.removeItem(at: filePath)
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                }
+            }
+            brackets.remove(at: bracketPosition)
         }
         
         func getDocumentsDirectory() -> URL {

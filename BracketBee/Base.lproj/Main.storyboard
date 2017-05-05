@@ -42,7 +42,7 @@
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
-                                    <segue destination="aIu-zX-35k" kind="show" identifier="fromBracketList" id="vDB-H6-uZa"/>
+                                    <segue destination="GMH-gd-rNn" kind="show" identifier="duplicateBracket" id="2eM-iU-pDt"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -340,6 +340,6 @@
         <image name="seed" width="29" height="29"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wGC-oJ-Hu2"/>
+        <segue reference="2eM-iU-pDt"/>
     </inferredMetricsTieBreakers>
 </document>
