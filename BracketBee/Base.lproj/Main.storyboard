@@ -42,7 +42,7 @@
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
-                                    <segue destination="GMH-gd-rNn" kind="show" identifier="duplicateBracket" id="2eM-iU-pDt"/>
+                                    <segue destination="aIu-zX-35k" kind="show" identifier="fromBracketList" id="KP6-UP-rVJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -55,7 +55,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="8OH-IA-bqK">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="GMH-gd-rNn" kind="show" id="c4t-xO-w4V"/>
+                                <segue destination="GMH-gd-rNn" kind="show" identifier="toCreateBracket" id="c4t-xO-w4V"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -340,6 +340,6 @@
         <image name="seed" width="29" height="29"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2eM-iU-pDt"/>
+        <segue reference="KP6-UP-rVJ"/>
     </inferredMetricsTieBreakers>
 </document>

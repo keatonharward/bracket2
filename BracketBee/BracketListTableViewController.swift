@@ -91,7 +91,7 @@ class BracketListTableViewController: UITableViewController {
         let duplicateAction = UITableViewRowAction(style: .default, title: "Duplicate") { (_, _) in
             let cell = self.tableView.cellForRow(at: indexPath)
             cell?.tag = indexPath.row
-            self.performSegue(withIdentifier: "duplicateBracket", sender: cell)
+            self.performSegue(withIdentifier: "toCreateBracket", sender: cell)
         }
         duplicateAction.backgroundColor = Keys.shared.accent
         
@@ -127,7 +127,7 @@ class BracketListTableViewController: UITableViewController {
                     destinationVC.title = bracket.name
                 }
             }
-        } else if segue.identifier == "duplicateBracket" {
+        } else if segue.identifier == "toCreateBracket" {
             if let cell = sender as? UITableViewCell {
                 let index = cell.tag
                 if let destinationVC = segue.destination as? CreateBracketViewController {
