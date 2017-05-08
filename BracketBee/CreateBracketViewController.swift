@@ -14,6 +14,10 @@ class CreateBracketViewController: UIViewController {
     var bracketName: String? = nil
     var seeded = true
     
+    // For long press drag and drop
+    var tableViewCellSnapShot: UIView?
+    var sourceIndexPath: IndexPath?
+    
     
     // MARK: - Outlets
     
@@ -131,6 +135,7 @@ class CreateBracketViewController: UIViewController {
         participantTableView.separatorColor = Keys.shared.accent
         participantTableView.backgroundColor = Keys.shared.alternateBackground
         tableviewBackgroundView.backgroundColor = Keys.shared.alternateBackground
+        addLongGestureRecognizerForTableView()
         
         // set up add bracket & add participant buttons
         createBracketButton.backgroundColor = Keys.shared.accent
@@ -169,12 +174,13 @@ class CreateBracketViewController: UIViewController {
      }
 }
 
-// TableView stuff
+// MARK: - TableView stuff
 extension CreateBracketViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return participants.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "participantCell", for: indexPath) as? ParticipantTableViewCell else { return ParticipantTableViewCell() }
         if seedingSegmentedControl.selectedSegmentIndex == 0 {
@@ -185,10 +191,101 @@ extension CreateBracketViewController: UITableViewDataSource, UITableViewDelegat
         cell.participant = participants[indexPath.row]
         return cell
     }
+    
+    // MARK: - long press drag & drop functionality
+    
+    func addLongGestureRecognizerForTableView() {
+        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(CreateBracketViewController.handleLongPressGesture(_:)))
+        participantTableView.addGestureRecognizer(longGesture)
+    }
+    
+    func handleLongPressGesture(_ sender: UILongPressGestureRecognizer) {
+        let state = sender.state
+        let location = sender.location(in: participantTableView)
+        
+        switch state {
+        case .began:
+            guard let indexPath = participantTableView.indexPathForRow(at: location) else { return }
+            sourceIndexPath = indexPath
+            guard let cell = participantTableView.cellForRow(at: indexPath) else { return }
+            
+            tableViewCellSnapShot = getCellSnapShot(inputView: cell)
+            
+            // Add the snapshot as subview, centered at cell's center...
+            var center = CGPoint(x: cell.center.x, y: cell.center.y)
+            tableViewCellSnapShot?.center = center
+            tableViewCellSnapShot?.alpha = 0.0
+            participantTableView.addSubview(tableViewCellSnapShot!)
+            UIView.animate(withDuration: 0.25, animations: {
+                // Offset for gesture location.
+                center.y = location.y
+                self.tableViewCellSnapShot?.center = center
+                self.tableViewCellSnapShot?.transform = CGAffineTransform(scaleX: 1.02, y: 1.02)
+                self.tableViewCellSnapShot?.alpha = 0.95
+                
+                cell.alpha = 0.0
+            }, completion: { _ in
+                cell.isHidden = true
+            })
+        case .changed:
+            guard let indexPath = participantTableView.indexPathForRow(at: location) else { return }
+            guard let snapShot = tableViewCellSnapShot else { return }
+            guard let sourceIndexPathTmp = sourceIndexPath else { return }
+            var center = snapShot.center
+            center.y = location.y
+            snapShot.center = center
+            
+            // check if current position is a new row
+            if indexPath != sourceIndexPathTmp {
+                //exchange position in participants array & rows
+                print(participants)
+                swap(&participants[indexPath.row], &participants[sourceIndexPathTmp.row])
+                print(participants)
+                participantTableView.moveRow(at: sourceIndexPathTmp, to: indexPath)
+                // ... and update source so it is in sync with UI changes.
+                sourceIndexPath = indexPath
+            }
+            
+        default:
+            guard let sourceIndexPathTmp = sourceIndexPath else { return }
+            guard let cell = participantTableView.cellForRow(at: sourceIndexPathTmp) else { return }
+            cell.isHidden = false
+            cell.alpha = 0.0
+            
+            UIView.animate(withDuration: 0.25, animations: {
+                self.tableViewCellSnapShot?.center = cell.center
+                self.tableViewCellSnapShot?.transform = .identity
+                self.tableViewCellSnapShot?.alpha = 0.0
+                
+                cell.alpha = 1.0
+            }, completion: { _ in
+                self.sourceIndexPath = nil
+                self.tableViewCellSnapShot?.removeFromSuperview()
+                self.tableViewCellSnapShot = nil
+                self.participantTableView.reloadData()
+                print(self.participants)
+            })
+        }
+    }
+    
+    func getCellSnapShot(inputView: UIView) -> UIImageView {
+        UIGraphicsBeginImageContextWithOptions(inputView.bounds.size, false, 0)
+        inputView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        let snapshot = UIImageView(image: image)
+        snapshot.layer.masksToBounds = false
+        snapshot.layer.cornerRadius = 0.0
+        snapshot.layer.shadowOffset = CGSize(width: -5.0, height: 0.0)
+        snapshot.layer.shadowRadius = 5.0
+        snapshot.layer.shadowOpacity = 0.4
+        
+        return snapshot
+    }
 }
 
-
-// To get rid of the border on the segmented control
+// MARK: - To get rid of the border on the segmented control
 extension UISegmentedControl {
     func removeBorders() {
         setBackgroundImage(imageWithColor(color: backgroundColor!), for: .normal, barMetrics: .default)
