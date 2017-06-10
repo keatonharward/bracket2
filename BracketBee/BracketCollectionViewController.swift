@@ -158,9 +158,9 @@ class BracketCollectionViewController: UICollectionViewController, UIGestureReco
             guard let leftMatchup = winnerMatchup.left, let rightMatchup = winnerMatchup.right else { return false }
             if nodeCanChange(indexPath: indexPath) {
                 if leftMatchup == winner {
-                    winnerMatchup.selectWinner(leftIsWinner: true)
+                    BracketController.shared.selectWinner(matchup: winnerMatchup, leftIsWinner: true)
                 } else if rightMatchup == winner {
-                    winnerMatchup.selectWinner(leftIsWinner: false)
+                    BracketController.shared.selectWinner(matchup: winnerMatchup, leftIsWinner: false)
                 } else {
                     print("You picked a winner that doesn't have teams!")
                 }
@@ -193,7 +193,7 @@ class BracketCollectionViewController: UICollectionViewController, UIGestureReco
             if selectedMatchupNode.winner == "TBD" {
                 return
             } else {
-                selectedMatchupNode.winner = "TBD"
+                BracketController.shared.deSelectWinner(matchup: selectedMatchupNode)
                 if bracket != nil {
                     BracketController.shared.saveToPersistentStore()
                     collectionView?.reloadData()

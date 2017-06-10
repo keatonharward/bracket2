@@ -35,16 +35,6 @@ class MatchupNode: NSObject, NSCoding {
         aCoder.encode(left, forKey: "left")
         aCoder.encode(right, forKey: "right")
     }
-    
-    func selectWinner(leftIsWinner: Bool) {
-        if leftIsWinner == true {
-            guard let left = self.left else { return }
-            self.winner = left.winner
-        } else {
-            guard let right = self.right else { return }
-            self.winner = right.winner
-        }
-    }
 }
 
 extension MatchupNode {

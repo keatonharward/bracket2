@@ -171,6 +171,20 @@
             return allRoundsDictionary
         }
         
+        func selectWinner(matchup: MatchupNode, leftIsWinner: Bool) {
+            if leftIsWinner == true {
+                guard let left = matchup.left else { return }
+                matchup.winner = left.winner
+            } else {
+                guard let right = matchup.right else { return }
+                matchup.winner = right.winner
+            }
+        }
+        
+        func deSelectWinner(matchup: MatchupNode) {
+            matchup.winner = "TBD"
+        }
+        
         func saveToPersistentStore() {
             for bracket in brackets {
                 let filePath = getDocumentsDirectory().appendingPathComponent("\(bracket.name).bracket")
