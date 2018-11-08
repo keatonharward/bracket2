@@ -26,6 +26,7 @@
 		538FA02C1E6E34B6000B778B /* ParticipantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538FA02B1E6E34B6000B778B /* ParticipantTableViewCell.swift */; };
 		53BDDD7F1E6DD19500ADDE3F /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BDDD7E1E6DD19500ADDE3F /* Keys.swift */; };
 		53BDDD811E6DD3D500ADDE3F /* BracketListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BDDD801E6DD3D500ADDE3F /* BracketListTableViewController.swift */; };
+		D7D897317CF5C9A35F08C49D /* Pods_BracketBee.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA122D89699080EB3C852282 /* Pods_BracketBee.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,9 @@
 		538FA02B1E6E34B6000B778B /* ParticipantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantTableViewCell.swift; sourceTree = "<group>"; };
 		53BDDD7E1E6DD19500ADDE3F /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		53BDDD801E6DD3D500ADDE3F /* BracketListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketListTableViewController.swift; sourceTree = "<group>"; };
+		A9E127FCE309BF40E98E92B9 /* Pods-BracketBee.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BracketBee.release.xcconfig"; path = "Pods/Target Support Files/Pods-BracketBee/Pods-BracketBee.release.xcconfig"; sourceTree = "<group>"; };
+		C7EAEA91C62AC8DF854B6A95 /* Pods-BracketBee.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BracketBee.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BracketBee/Pods-BracketBee.debug.xcconfig"; sourceTree = "<group>"; };
+		DA122D89699080EB3C852282 /* Pods_BracketBee.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BracketBee.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7D897317CF5C9A35F08C49D /* Pods_BracketBee.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +110,8 @@
 				5330890F1E4E7CA6002B3AD3 /* BracketBeeTests */,
 				5330891A1E4E7CA6002B3AD3 /* BracketBeeUITests */,
 				533088F61E4E7CA6002B3AD3 /* Products */,
+				D924D106F7A8CDB78287B42A /* Pods */,
+				F74904509673BA1055A7E5E8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -193,6 +200,23 @@
 			name = "View Controller";
 			sourceTree = "<group>";
 		};
+		D924D106F7A8CDB78287B42A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C7EAEA91C62AC8DF854B6A95 /* Pods-BracketBee.debug.xcconfig */,
+				A9E127FCE309BF40E98E92B9 /* Pods-BracketBee.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F74904509673BA1055A7E5E8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DA122D89699080EB3C852282 /* Pods_BracketBee.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -200,9 +224,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 533089201E4E7CA6002B3AD3 /* Build configuration list for PBXNativeTarget "BracketBee" */;
 			buildPhases = (
+				4D3155B2AA91BE77B00EF16E /* [CP] Check Pods Manifest.lock */,
 				533088F11E4E7CA6002B3AD3 /* Sources */,
 				533088F21E4E7CA6002B3AD3 /* Frameworks */,
 				533088F31E4E7CA6002B3AD3 /* Resources */,
+				074434734DF7D90DC1B39D4F /* [CP] Embed Pods Frameworks */,
+				8C41E4FF06DDA8E41E7CB524 /* [CP] Copy Pods Resources */,
+				53ADAEF3219408BE0039AD3A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -324,6 +352,74 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		074434734DF7D90DC1B39D4F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BracketBee/Pods-BracketBee-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4D3155B2AA91BE77B00EF16E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BracketBee-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		53ADAEF3219408BE0039AD3A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#if which swiftlint >/dev/null; then\n#swiftlint\n#else\n#echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#fi\n";
+		};
+		8C41E4FF06DDA8E41E7CB524 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BracketBee/Pods-BracketBee-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		533088F11E4E7CA6002B3AD3 /* Sources */ = {
@@ -493,6 +589,7 @@
 		};
 		533089211E4E7CA6002B3AD3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7EAEA91C62AC8DF854B6A95 /* Pods-BracketBee.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 7PDCTCAB87;
@@ -506,6 +603,7 @@
 		};
 		533089221E4E7CA6002B3AD3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A9E127FCE309BF40E98E92B9 /* Pods-BracketBee.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 7PDCTCAB87;

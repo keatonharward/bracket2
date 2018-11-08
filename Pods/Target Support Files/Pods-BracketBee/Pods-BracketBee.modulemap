@@ -1,0 +1,6 @@
+framework module Pods_BracketBee {
+  umbrella header "Pods-BracketBee-umbrella.h"
+
+  export *
+  module * { export * }
+}

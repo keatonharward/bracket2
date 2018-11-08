@@ -8,28 +8,61 @@
 
 import UIKit
 
+class NodeMapObject {
+    var position: CGPoint
+    var node: MatchupNode
+    init(with position: CGPoint, node: MatchupNode) {
+        self.position = position
+        self.node = node
+    }
+}
+
+let defaultRadius = 40
+
+
 class BracketListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //  MARK: - Make test brackets
-//        let numberOfTeamsInTournament = 64
-//        let numberOfTestBrackets = 10
-//        var tempTeams: [String] = []
-//        var counter = 1
-//        while counter <= numberOfTeamsInTournament {
-//            tempTeams.append("\(counter)")
-//            counter += 1
-//        }
-//        let tempBracket = BracketController.shared.layoutBracket(teams: tempTeams, seeded: true)
-//        var testBracketNumber = 1
-//        while testBracketNumber <= numberOfTestBrackets {
-//            let bracketTest = Bracket(name: "Test bracket \(testBracketNumber)", seeded: true, teams: tempTeams, champion: tempBracket)
-//            BracketController.shared.brackets.append(bracketTest)
-//            BracketController.shared.saveToPersistentStore()
-//            testBracketNumber += 1
-//        }
+        let numberOfTeamsInTournament = 8
+        let numberOfTestBrackets = 1
+        var tempTeams: [String] = []
+        var counter = 1
+        while counter <= numberOfTeamsInTournament {
+            tempTeams.append("\(counter)")
+            counter += 1
+        }
+        let tempBracket = BracketController.shared.layoutBracket(teams: tempTeams, seeded: true)
+        
+        var nodeMap = [[NodeMapObject]]()
+        tempBracket.traverseTreeWithBlock(nil) { (node, level) in
+            
+            guard let node = node else {
+                return
+            }
+            
+            let numberofsegments = pow(2, level)
+            
+            let point = CGPoint.zero // todo calculate
+            
+            let nodeMapObject = NodeMapObject(with: point, node: node)
+            print(nodeMapObject.node.description)
+        }
+        
+        for row in nodeMap {
+            for node in row {
+                
+            }
+        }
+        var testBracketNumber = 1
+        while testBracketNumber <= numberOfTestBrackets {
+            let bracketTest = Bracket(name: "Test bracket \(testBracketNumber)", seeded: true, teams: tempTeams, champion: tempBracket)
+            BracketController.shared.brackets.append(bracketTest)
+            BracketController.shared.saveToPersistentStore()
+            testBracketNumber += 1
+        }
         
         // MARK: - Setup tableview
         tableView.separatorColor = Keys.shared.accent
